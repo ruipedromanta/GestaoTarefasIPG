@@ -39,8 +39,7 @@ namespace GestaoTarefasIPG
             services.AddDbContext<IPGDbContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("IPGDbContext")));
 
-            //services.AddDbContext<IPGDbContext>(options =>
-               // options.UseSqlServer(Configuration.GetConnectionString("IPGDbContext")));
+       
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
