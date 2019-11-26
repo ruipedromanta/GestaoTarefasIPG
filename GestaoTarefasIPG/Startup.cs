@@ -47,6 +47,7 @@ namespace GestaoTarefasIPG
         {
             if (env.IsDevelopment())
             {
+          
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
             }
@@ -71,6 +72,13 @@ namespace GestaoTarefasIPG
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+
+            if (env.IsDevelopment()) {
+                using (var serviceScope = app.ApplicationServices.CreateScope()) {
+                    var db = serviceScope.ServiceProvider.GetService<IPGDbContext>();
+                    SeedData.Populate(db);
+                }
+            }
         }
     }
 }
