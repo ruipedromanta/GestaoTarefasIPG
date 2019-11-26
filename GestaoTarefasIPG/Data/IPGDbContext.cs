@@ -8,11 +8,11 @@ namespace GestaoTarefasIPG.Models
 {
     public class IPGDbContext : DbContext
     {
-        public IPGDbContext(DbContextOptions options)
+        public IPGDbContext (DbContextOptions<IPGDbContext> options)
             : base(options)
         {
         }
 
-        public DbSet<Departamento> Departamento { get; set; }
+        public DbSet<GestaoTarefasIPG.Models.Departamento> Departamento { get; set; }
     }
 }
