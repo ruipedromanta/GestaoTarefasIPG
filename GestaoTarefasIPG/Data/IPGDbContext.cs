@@ -14,5 +14,7 @@ namespace GestaoTarefasIPG.Models
         }
 
         public DbSet<GestaoTarefasIPG.Models.Funcao> Funcao { get; set; }
+
+        public DbSet<GestaoTarefasIPG.Models.Departamento> Departamento { get; set; }
     }
 }

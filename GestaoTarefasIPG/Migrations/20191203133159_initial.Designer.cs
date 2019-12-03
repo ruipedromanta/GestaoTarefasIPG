@@ -8,9 +8,9 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GestaoTarefasIPG.Migrations
 {
-    [DbContext(typeof(DepartamentoDbContext))]
-    [Migration("20191126110718_Inicial")]
-    partial class Inicial
+    [DbContext(typeof(IPGDbContext))]
+    [Migration("20191203133159_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -40,6 +40,23 @@ namespace GestaoTarefasIPG.Migrations
                     b.HasKey("DepartamentoId");
 
                     b.ToTable("Departamento");
+                });
+
+            modelBuilder.Entity("GestaoTarefasIPG.Models.Funcao", b =>
+                {
+                    b.Property<int>("FuncaoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("NomeFuncao")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
+
+                    b.HasKey("FuncaoId");
+
+                    b.ToTable("Funcao");
                 });
 #pragma warning restore 612, 618
         }

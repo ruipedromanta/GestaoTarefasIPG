@@ -18,6 +18,28 @@ namespace GestaoTarefasIPG.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("GestaoTarefasIPG.Models.Departamento", b =>
+                {
+                    b.Property<int>("DepartamentoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("NomeDepartamento")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(120)")
+                        .HasMaxLength(120);
+
+                    b.Property<string>("NumeroDepartamento")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(8)")
+                        .HasMaxLength(8);
+
+                    b.HasKey("DepartamentoId");
+
+                    b.ToTable("Departamento");
+                });
+
             modelBuilder.Entity("GestaoTarefasIPG.Models.Funcao", b =>
                 {
                     b.Property<int>("FuncaoId")
