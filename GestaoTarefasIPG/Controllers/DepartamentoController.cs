@@ -53,7 +53,7 @@ namespace GestaoTarefasIPG.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("DepartamentoId,NomeDepartamento,NumeroDepartamento")] Departamento departamento)
+        public async Task<IActionResult> Create([Bind("DepartamentoId,NomeDepartamento")] Departamento departamento)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace GestaoTarefasIPG.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("DepartamentoId,NomeDepartamento,NumeroDepartamento")] Departamento departamento)
+        public async Task<IActionResult> Edit(int id, [Bind("DepartamentoId,NomeDepartamento")] Departamento departamento)
         {
             if (id != departamento.DepartamentoId)
             {
