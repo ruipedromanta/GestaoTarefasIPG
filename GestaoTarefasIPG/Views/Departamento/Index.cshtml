@@ -9,6 +9,16 @@
 <p>
     <a asp-action="Create" class="btn btn-sm btn-outline-success">Novo Departamento</a>
 </p>
+
+@using (Html.BeginForm()) {
+
+    <p>
+
+        @Html.TextBox("searchString")
+        <input type="submit" value="Procurar">
+    </p>
+}
+
 <table class="table table table-info">
     <thead>
         <tr>
@@ -29,9 +39,9 @@
                     @Html.DisplayFor(modelItem => item.NomeDepartamento)
                 </td>
 
-                <td>
-                    <a asp-action="Details" class="btn btn-sm btn-warning" asp-route-id="@item.DepartamentoId">Detalhes</a>
-                    <a asp-action="Edit" class="btn btn-sm btn-success" asp-route-id="@item.DepartamentoId">Editar</a> |
+                <td align="right">
+                    <a asp-action="Details" class="btn btn-sm btn-primary" asp-route-id="@item.DepartamentoId">Detalhes</a>
+                    <a asp-action="Edit" class="btn btn-sm btn-warning" asp-route-id="@item.DepartamentoId">Editar</a> |
                     <a asp-action="Delete" class="btn btn-sm btn-danger" asp-route-id="@item.DepartamentoId">Apagar</a>
                 </td>
             </tr>

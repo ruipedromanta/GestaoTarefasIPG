@@ -21,8 +21,16 @@ namespace GestaoTarefasIPG.Controllers
         }
 
         // GET: Departamento
-        public async Task<IActionResult> Index(int page =1)
-        {
+        public IActionResult Index(int page = 1, string searchString = null) {
+            var departamento = from p in _context.Departamento
+                               select p;
+
+            if(!String.IsNullOrEmpty(searchString)) {
+                departamento = departamento.Where(p => p.NomeDepartamento.Contains(searchString));
+            }
+
+
+
             decimal nuDepartamento = _context.Departamento.Count();
             int NUMERO_PAGINAS_ANTES_DEPOIS = ((int)nuDepartamento / PaginasTamanho);
 
@@ -31,7 +39,7 @@ namespace GestaoTarefasIPG.Controllers
             }
 
             DepartamentoVModel dp = new DepartamentoVModel {
-                Departamento = _context.Departamento.OrderBy(p => p.NomeDepartamento).Skip((page - 1) * PaginasTamanho).Take(PaginasTamanho),
+                Departamento = departamento.OrderBy(p => p.NomeDepartamento).Skip((page -1) * PaginasTamanho).Take(PaginasTamanho),
                 PagAtual = page,
                 PriPagina = Math.Max(1, page - NUMERO_PAGINAS_ANTES_DEPOIS),
                 TotPaginas = (int)Math.Ceiling(nuDepartamento / PaginasTamanho)
