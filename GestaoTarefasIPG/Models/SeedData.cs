@@ -17,7 +17,9 @@ namespace GestaoTarefasIPG.Models {
                 new Departamento { NomeDepartamento = "Tesouraria", NumeroDepartamento = "15324896"},
                 new Departamento { NomeDepartamento = "Reprografia", NumeroDepartamento = "15247896"},
                 new Departamento { NomeDepartamento = "Serviços Sociais", NumeroDepartamento = "15247896"},
-                new Departamento { NomeDepartamento = "Cantina", NumeroDepartamento = "15478563"}
+                new Departamento { NomeDepartamento = "Cantina", NumeroDepartamento = "15478563"},
+                new Departamento { NomeDepartamento = "", NumeroDepartamento = ""}
+                
 
 
                 );

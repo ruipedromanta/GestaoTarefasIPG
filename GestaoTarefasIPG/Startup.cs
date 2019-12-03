@@ -45,6 +45,10 @@ namespace GestaoTarefasIPG
         {
             if (env.IsDevelopment())
             {
+                using (var ServiceScope = app.ApplicationServices.CreateScope()) {
+                    var db = ServiceScope.ServiceProvider.GetService<IPGDbContext>();
+                    SeedData.Populate(db);
+                }
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
             }
