@@ -11,9 +11,9 @@ namespace GestaoTarefasIPG.Controllers
 {
     public class DepartamentoController : Controller
     {
-        private readonly IPGDbContext _context;
+        private readonly DepartamentoDbContext _context;
 
-        public DepartamentoController(IPGDbContext context)
+        public DepartamentoController(DepartamentoDbContext context)
         {
             _context = context;
         }

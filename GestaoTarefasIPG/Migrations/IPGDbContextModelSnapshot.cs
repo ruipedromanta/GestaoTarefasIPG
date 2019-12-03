@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GestaoTarefasIPG.Migrations
 {
-    [DbContext(typeof(IPGDbContext))]
+    [DbContext(typeof(DepartamentoDbContext))]
     partial class IPGDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

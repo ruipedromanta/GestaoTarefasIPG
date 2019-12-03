@@ -36,7 +36,7 @@ namespace GestaoTarefasIPG
             services.AddControllersWithViews();
             services.AddRazorPages();
 
-            services.AddDbContext<IPGDbContext>(options =>
+            services.AddDbContext<DepartamentoDbContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("IPGDbContext")));
         }
 
@@ -46,7 +46,7 @@ namespace GestaoTarefasIPG
             if (env.IsDevelopment())
             {
                 using (var ServiceScope = app.ApplicationServices.CreateScope()) {
-                    var db = ServiceScope.ServiceProvider.GetService<IPGDbContext>();
+                    var db = ServiceScope.ServiceProvider.GetService<DepartamentoDbContext>();
                     SeedData.Populate(db);
                 }
                 app.UseDeveloperExceptionPage();

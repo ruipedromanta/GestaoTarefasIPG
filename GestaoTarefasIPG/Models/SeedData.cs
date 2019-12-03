@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace GestaoTarefasIPG.Models {
     public class SeedData {
 
-        public static void Populate(IPGDbContext db) {
+        public static void Populate(DepartamentoDbContext db) {
             if (db.Departamento.Any()) {
                 return;
             }
@@ -18,7 +18,7 @@ namespace GestaoTarefasIPG.Models {
                 new Departamento { NomeDepartamento = "Reprografia", NumeroDepartamento = "15247896"},
                 new Departamento { NomeDepartamento = "Serviços Sociais", NumeroDepartamento = "15247896"},
                 new Departamento { NomeDepartamento = "Cantina", NumeroDepartamento = "15478563"},
-                new Departamento { NomeDepartamento = "", NumeroDepartamento = ""}
+                new Departamento { NomeDepartamento = "Papelaria", NumeroDepartamento = "15478965"}
                 
 
 
