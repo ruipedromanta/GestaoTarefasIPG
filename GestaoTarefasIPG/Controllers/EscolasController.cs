@@ -59,7 +59,12 @@ namespace GestaoTarefasIPG.Controllers
             {
                 _context.Add(escola);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
+
+                ViewBag.Title = "Escola adicionada com sucesso";
+                ViewBag.Message = "Nova escola criada com sucesso";
+
+                return View("Success");
             }
             return View(escola);
         }
@@ -110,7 +115,12 @@ namespace GestaoTarefasIPG.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
+
+                ViewBag.Title = "Escola editada com sucesso";
+                ViewBag.Message = "A escola foi editada com sucesso";
+
+                return View("Success");
             }
             return View(escola);
         }
@@ -141,7 +151,12 @@ namespace GestaoTarefasIPG.Controllers
             var escola = await _context.Escola.FindAsync(id);
             _context.Escola.Remove(escola);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            //return RedirectToAction(nameof(Index));
+
+            ViewBag.Title = "Escola apagada com sucesso";
+            ViewBag.Message = "A escola foi apagada com sucesso";
+
+            return View("Success");
         }
 
         private bool EscolaExists(int id)
