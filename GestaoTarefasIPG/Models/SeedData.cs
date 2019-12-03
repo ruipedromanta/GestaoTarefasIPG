@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace GestaoTarefasIPG.Models {
     public class SeedData {
 
-        public static void Populate(DepartamentoDbContext db) {
+        public static void Populate(IPGDbContext db) {
             if (db.Departamento.Any()) {
                 return;
             }
@@ -19,18 +19,9 @@ namespace GestaoTarefasIPG.Models {
                 new Funcao { NomeFuncao = "" },
                 new Funcao { NomeFuncao = "" }
                 );
-
-            db.Departamento.AddRange(
-                new Departamento { NomeDepartamento = "Secretaria", NumeroDepartamento = "15874698"},
-                new Departamento { NomeDepartamento = "Tesouraria", NumeroDepartamento = "15324896"},
-                new Departamento { NomeDepartamento = "Reprografia", NumeroDepartamento = "15247896"},
-                new Departamento { NomeDepartamento = "Serviços Sociais", NumeroDepartamento = "15247896"},
-                new Departamento { NomeDepartamento = "Cantina", NumeroDepartamento = "15478563"},
-                new Departamento { NomeDepartamento = "Papelaria", NumeroDepartamento = "15478965"}
-                
-
-
-        private static void AdicionaDepartamentos(IPGDbContext db) {
+            db.SaveChanges();
+        }
+        public static void AdicionaDepartamentos(IPGDbContext db) {
             if (db.Departamento.Any()) {
                 return;
             }
@@ -42,7 +33,7 @@ namespace GestaoTarefasIPG.Models {
                 new Departamento { NomeDepartamento = "Cantina" },
                 new Departamento { NomeDepartamento = "Papelaria" }
                 );
-
+            db.SaveChanges();
         }
     }
 }
