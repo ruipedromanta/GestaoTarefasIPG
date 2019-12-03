@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GestaoTarefasIPG.Migrations
 {
-    [DbContext(typeof(DepartamentoDbContext))]
+    [DbContext(typeof(IPGDbContext))]
     [Migration("20191126110718_Inicial")]
     partial class Inicial
     {

@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GestaoTarefasIPG.Models
 {
-    public class DepartamentoDbContext : DbContext
+    public class IPGDbContext : DbContext
     {
-        public DepartamentoDbContext (DbContextOptions<DepartamentoDbContext> options)
+        public IPGDbContext (DbContextOptions<IPGDbContext> options)
             : base(options)
         {
         }
