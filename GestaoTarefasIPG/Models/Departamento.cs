@@ -12,8 +12,6 @@ namespace GestaoTarefasIPG.Models {
         [Required]
         [StringLength(120)]
         public string NomeDepartamento { get; set; }
-        [Required]
-        [StringLength(8)]
-        public string NumeroDepartamento { get; set; }
+        
     }
 }
