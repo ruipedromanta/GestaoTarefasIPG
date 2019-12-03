@@ -8,9 +8,9 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GestaoTarefasIPG.Migrations
 {
-    [DbContext(typeof(IPGDbContext))]
-    [Migration("20191203133159_initial")]
-    partial class initial
+    [DbContext(typeof(DepartamentoDbContext))]
+    [Migration("20191126110718_Inicial")]
+    partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
