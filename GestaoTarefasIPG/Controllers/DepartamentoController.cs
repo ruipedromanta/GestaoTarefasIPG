@@ -14,15 +14,13 @@ namespace GestaoTarefasIPG.Controllers
         private readonly IPGDbContext _context;
 
         public int PaginasTamanho = 5;
-
         public DepartamentoController(IPGDbContext context)
         {
             _context = context;
         }
 
         // GET: Departamento
-        public async Task<IActionResult> Index(int page =1)
-        {
+        public IActionResult Index(int page = 1) {
             decimal nuDepartamento = _context.Departamento.Count();
             int NUMERO_PAGINAS_ANTES_DEPOIS = ((int)nuDepartamento / PaginasTamanho);
 

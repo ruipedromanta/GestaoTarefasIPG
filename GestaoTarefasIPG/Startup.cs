@@ -48,7 +48,6 @@ namespace GestaoTarefasIPG
                 using (var ServiceScope = app.ApplicationServices.CreateScope()) {
                     var db = ServiceScope.ServiceProvider.GetService<IPGDbContext>();
                     SeedData.AdicionaDepartamentos(db);
-                    
                 }
                 
                 app.UseDeveloperExceptionPage();
