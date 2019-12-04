@@ -2,7 +2,7 @@
 
 namespace GestaoTarefasIPG.Migrations
 {
-    public partial class Initial : Migration
+    public partial class N : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
