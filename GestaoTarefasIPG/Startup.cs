@@ -76,7 +76,7 @@ namespace GestaoTarefasIPG
             if (env.IsDevelopment()) {
                 using (var serviceScope = app.ApplicationServices.CreateScope()) {
                     var db = serviceScope.ServiceProvider.GetService<IPGDbContext>();
-                    SeedData.Populate(db);
+                    SeedData.AdicionaEscolas(db);
                 }
             }
         }
