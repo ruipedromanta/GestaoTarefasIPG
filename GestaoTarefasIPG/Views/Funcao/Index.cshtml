@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GestaoTarefasIPG.Models.Funcao>
+﻿@model FuncoesViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -12,24 +12,29 @@
 <table class="table table-info">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.NomeFuncao)
-            </th>
-            <th></th>
+            <th>Funcoes</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NomeFuncao)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.FuncaoId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.FuncaoId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.FuncaoId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Funcoes) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeFuncao)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.FuncaoId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.FuncaoId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.FuncaoId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@for (int i = Model.PrimeiraPagina; i <= Model.UltimaPagina; i++) {
+    @if (i == Model.PaginaAtual) {
+        <a href="#" class="btn btn-primary">@i</a>
+    } else {
+        <a asp-action="Index" asp-route-page="@i" class="btn btn-outline-info ">@i</a>
+    }
+}

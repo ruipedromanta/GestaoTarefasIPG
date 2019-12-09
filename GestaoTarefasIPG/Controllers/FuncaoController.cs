@@ -13,15 +13,36 @@ namespace GestaoTarefasIPG.Controllers
     {
         private readonly IPGDbContext _context;
 
+        private const int NUMERO_FUNCOES_POR_PAGINA = 3;
+        private const int NUMERO_PAGINAS_ANTES_E_DEPOIS = 2;
+
         public FuncaoController(IPGDbContext context)
         {
             _context = context;
         }
 
         // GET: Funcao
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.Funcao.ToListAsync());
+        public async Task<IActionResult> Index(int page = 1) {
+            // return View(await _context.Funcao.ToListAsync());
+
+            decimal numeroFuncoes = _context.Funcao.Count();
+
+            FuncoesViewModel vm = new FuncoesViewModel {
+                Funcoes = _context.Funcao
+                .OrderBy(p => p.NomeFuncao)
+                .Skip((page - 1) * NUMERO_FUNCOES_POR_PAGINA)
+                .Take(NUMERO_FUNCOES_POR_PAGINA),
+
+                PaginaAtual = page,
+
+                PrimeiraPagina = Math.Max(1, page - NUMERO_PAGINAS_ANTES_E_DEPOIS),
+
+                TotalPaginas = (int)Math.Ceiling(numeroFuncoes / NUMERO_FUNCOES_POR_PAGINA)
+            };
+
+            vm.UltimaPagina = Math.Min(vm.TotalPaginas, page + NUMERO_PAGINAS_ANTES_E_DEPOIS);
+
+            return View(vm);
         }
 
         // GET: Funcao/Details/5
