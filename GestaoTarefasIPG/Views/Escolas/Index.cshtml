@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GestaoTarefasIPG.Models.Escola>
+﻿@model EscolasViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -12,30 +12,33 @@
 <table class="table table-info">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.NomeEscola)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Telefone)
-            </th>
-            <th></th>
+           
+            <th>Escolas</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NomeEscola)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Telefone)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.EscolaId" class="btn btn-warning">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.EscolaId" class="btn btn-info">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.EscolaId" class="btn btn-danger">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Escolas) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeEscola)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefone)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.EscolaId" class="btn btn-warning">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.EscolaId" class="btn btn-info">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.EscolaId" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@for (int i = Model.FirstPageShow; i <= Model.LastPageShow; i++) {
+    @if (i == Model.CurrentPage) {
+        <a href="#" class="btn btn-primary">@i</a>
+    } else {
+        <a asp-action="Index" asp-route-page="@i" class="btn btn-outline-info ">@i</a>
+    }
+}

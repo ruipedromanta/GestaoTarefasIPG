@@ -13,15 +13,36 @@ namespace GestaoTarefasIPG.Controllers
     {
         private readonly IPGDbContext _context;
 
+        private const int NUMERO_ESCOLAS_POR_PAGINA = 2;
+        private const int NUMERO_PAGINAS_ANTES_E_DEPOIS = 2;
+
         public EscolasController(IPGDbContext context)
         {
             _context = context;
         }
 
         // GET: Escolas
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
-            return View(await _context.Escola.ToListAsync());
+            //return View(await _context.Escola.ToListAsync());
+            decimal numeroEscolas = _context.Escola.Count();
+
+            EscolasViewModel vm = new EscolasViewModel {
+                Escolas = _context.Escola
+                .OrderBy(p => p.NomeEscola)
+                .Skip((page - 1) * NUMERO_ESCOLAS_POR_PAGINA)
+                .Take(NUMERO_ESCOLAS_POR_PAGINA),
+
+                CurrentPage = page,
+
+                FirstPageShow = Math.Max(1, page - NUMERO_PAGINAS_ANTES_E_DEPOIS),
+
+                TotalPages = (int)Math.Ceiling(numeroEscolas / NUMERO_ESCOLAS_POR_PAGINA)
+            };
+
+            vm.LastPageShow = Math.Min(vm.TotalPages, page + NUMERO_PAGINAS_ANTES_E_DEPOIS);
+
+            return View(vm);
         }
 
         // GET: Escolas/Details/5
