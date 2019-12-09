@@ -59,7 +59,12 @@ namespace GestaoTarefasIPG.Controllers
             {
                 _context.Add(funcao);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                // return RedirectToAction(nameof(Index));
+
+                ViewBag.Title = "Funcao adicionada com sucesso";
+                ViewBag.Message = "Nova funcao criada com sucesso";
+
+                return View("Success");
             }
             return View(funcao);
         }
@@ -110,7 +115,12 @@ namespace GestaoTarefasIPG.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
+
+                ViewBag.Title = "Funcao editada com sucesso";
+                ViewBag.Message = "A Funcao foi editada com sucesso";
+
+                return View("Success");
             }
             return View(funcao);
         }
@@ -141,7 +151,12 @@ namespace GestaoTarefasIPG.Controllers
             var funcao = await _context.Funcao.FindAsync(id);
             _context.Funcao.Remove(funcao);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            //return RedirectToAction(nameof(Index));
+
+            ViewBag.Title = "Funcao apagada com sucesso";
+            ViewBag.Message = "A funcao foi apagada com sucesso";
+
+            return View("Success");
         }
 
         private bool FuncaoExists(int id)
