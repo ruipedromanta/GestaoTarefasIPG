@@ -13,12 +13,12 @@ namespace GestaoTarefasIPG.Models {
 
 
             db.Funcao.AddRange(
-                new Funcao { NomeFuncao = "Secretaria" },
-                new Funcao { NomeFuncao = "Tesouraria" },
-                new Funcao { NomeFuncao = "Reprografia" },
-                new Funcao { NomeFuncao = "Serviços Sociais" },
-                new Funcao { NomeFuncao = "Cantina" },
-                new Funcao { NomeFuncao = "Papelaria" }
+                new Funcao { NomeFuncao = "Presidente" },
+                new Funcao { NomeFuncao = "Vice Presidente" },
+                new Funcao { NomeFuncao = "Diretor" },
+                new Funcao { NomeFuncao = "Auxiliar" },
+                new Funcao { NomeFuncao = "Professor" }
+                
 
 
 
