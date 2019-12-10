@@ -40,8 +40,14 @@
                         <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Página Inicial</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacidade</a>
+                        <a class="nav-link" asp-area="" asp-controller="Departamento" asp-action="">Departamento</a>
                     </li>
+                    <!-- <li class="nav-item">
+        <a class="nav-link" asp-area="" asp-controller="Escola" asp-action="">Escola</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" asp-area="" asp-controller="Função" asp-action="">Função</a>
+    </li>-->
                     <partial name="_LoginPartial" />
                 </ul>
             </div>
@@ -91,30 +97,30 @@
         </nav>
     </header>
      -->
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-md-10 mx-auto">
-                    &copy; 2019 - GestaoTarefasIPG - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!--
+                    <div class="container">
+                        <main role="main" class="pb-3">
+                            @RenderBody()
+                        </main>
+                    </div>
+                    <footer>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-8 col-md-10 mx-auto">
+                                    &copy; 2019 - GestaoTarefasIPG - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+                    <!--
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2019 - GestaoTarefasIPG - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
         -->
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @RenderSection("Scripts", required: false)
+                    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+                    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+                    <script src="~/js/site.js" asp-append-version="true"></script>
+                    @RenderSection("Scripts", required: false)
 </body>
 </html>
