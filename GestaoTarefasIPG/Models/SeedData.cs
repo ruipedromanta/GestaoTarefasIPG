@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 namespace GestaoTarefasIPG.Models {
     public static class SeedData {
         
+        
         public static void AdicionaEscolas (IPGDbContext db) {
 
             if (db.Escola.Any()) {
