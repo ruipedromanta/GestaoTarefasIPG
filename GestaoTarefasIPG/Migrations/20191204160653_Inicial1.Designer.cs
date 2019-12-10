@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GestaoTarefasIPG.Migrations
 {
     [DbContext(typeof(IPGDbContext))]
-    [Migration("20191126110718_Inicial")]
-    partial class Inicial
+    [Migration("20191204160653_Inicial1")]
+    partial class Inicial1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,11 +31,6 @@ namespace GestaoTarefasIPG.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(120)")
                         .HasMaxLength(120);
-
-                    b.Property<string>("NumeroDepartamento")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(8)")
-                        .HasMaxLength(8);
 
                     b.HasKey("DepartamentoId");
 

@@ -17,7 +17,12 @@ namespace GestaoTarefasIPG.Models {
                 new Departamento { NomeDepartamento = "Reprografia" },
                 new Departamento { NomeDepartamento = "Serviços Sociais" },
                 new Departamento { NomeDepartamento = "Cantina" },
-                new Departamento { NomeDepartamento = "Papelaria" }
+                new Departamento { NomeDepartamento = "Papelaria" },
+                new Departamento { NomeDepartamento = "Papelaria1" },
+                new Departamento { NomeDepartamento = "Papelaria2" }
+
+
+
                 );
             db.SaveChanges();
         }
