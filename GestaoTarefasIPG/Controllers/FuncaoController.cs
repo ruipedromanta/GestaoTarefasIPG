@@ -74,7 +74,7 @@ namespace GestaoTarefasIPG.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("FuncaoId,NomeFuncao")] Funcao funcao)
+        public async Task<IActionResult> Create([Bind("FuncaoId,Nome da Funcão")] Funcao funcao)
         {
             if (ModelState.IsValid)
             {
@@ -82,8 +82,8 @@ namespace GestaoTarefasIPG.Controllers
                 await _context.SaveChangesAsync();
                 // return RedirectToAction(nameof(Index));
 
-                ViewBag.Title = "Funcao adicionada com sucesso";
-                ViewBag.Message = "Nova funcao criada com sucesso";
+                ViewBag.Title = "Funcão adicionada com sucesso";
+                ViewBag.Message = "Nova funcão criada com sucesso";
 
                 return View("Success");
             }
@@ -111,7 +111,7 @@ namespace GestaoTarefasIPG.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("FuncaoId,NomeFuncao")] Funcao funcao)
+        public async Task<IActionResult> Edit(int id, [Bind("FuncaoId,Nome da Funcão")] Funcao funcao)
         {
             if (id != funcao.FuncaoId)
             {
@@ -138,8 +138,8 @@ namespace GestaoTarefasIPG.Controllers
                 }
                 //return RedirectToAction(nameof(Index));
 
-                ViewBag.Title = "Funcao editada com sucesso";
-                ViewBag.Message = "A Funcao foi editada com sucesso";
+                ViewBag.Title = "Funcão editada com sucesso";
+                ViewBag.Message = "A Funcão foi editada com sucesso";
 
                 return View("Success");
             }
@@ -174,8 +174,8 @@ namespace GestaoTarefasIPG.Controllers
             await _context.SaveChangesAsync();
             //return RedirectToAction(nameof(Index));
 
-            ViewBag.Title = "Funcao apagada com sucesso";
-            ViewBag.Message = "A funcao foi apagada com sucesso";
+            ViewBag.Title = "Funcão apagada com sucesso";
+            ViewBag.Message = "A Funcão foi apagada com sucesso";
 
             return View("Success");
         }
