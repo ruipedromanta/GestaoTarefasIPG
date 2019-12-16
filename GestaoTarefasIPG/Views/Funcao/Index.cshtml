@@ -9,6 +9,14 @@
 <p>
     <a asp-action="Create" class="btn btn-success">Nova Função</a>
 </p>
+
+@using (Html.BeginForm()) {
+    <p>
+        @Html.TextBox("searchString")
+        <input type="submit" value="Procurar" />
+    </p>
+}
+
 <table class="table table-info">
     <thead>
         <tr>

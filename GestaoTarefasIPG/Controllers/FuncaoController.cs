@@ -22,13 +22,21 @@ namespace GestaoTarefasIPG.Controllers
         }
 
         // GET: Funcao
-        public async Task<IActionResult> Index(int page = 1) {
-            // return View(await _context.Funcao.ToListAsync());
+        //public async Task<IActionResult> Index(int page = 1){
 
+        public IActionResult Index(int page = 1, string searchString = null) {
+            var Funcao = from p in _context.Funcao select p;
+
+            if (!String.IsNullOrEmpty(searchString)) {
+                Funcao = Funcao.Where(p => p.NomeFuncao.Contains(searchString));
+            }
+
+
+            //return View(await _context.Escola.ToListAsync());
             decimal numeroFuncoes = _context.Funcao.Count();
 
             FuncoesViewModel vm = new FuncoesViewModel {
-                Funcoes = _context.Funcao
+                Funcoes = Funcao
                 .OrderBy(p => p.NomeFuncao)
                 .Skip((page - 1) * NUMERO_FUNCOES_POR_PAGINA)
                 .Take(NUMERO_FUNCOES_POR_PAGINA),
