@@ -22,13 +22,21 @@ namespace GestaoTarefasIPG.Controllers
         }
 
         // GET: Escolas
-        public async Task<IActionResult> Index(int page = 1)
-        {
-            //return View(await _context.Escola.ToListAsync());
-            decimal numeroEscolas = _context.Escola.Count();
+        //public async Task<IActionResult> Index(int page = 1){
+
+        public IActionResult Index(int page=1, string searchString = null) {
+            var Escola = from p in _context.Escola select p;
+
+            if (!String.IsNullOrEmpty(searchString)) {
+                Escola = Escola.Where(p => p.NomeEscola.Contains(searchString));
+            }
+       
+
+        //return View(await _context.Escola.ToListAsync());
+        decimal numeroEscolas = _context.Escola.Count();
 
             EscolasViewModel vm = new EscolasViewModel {
-                Escolas = _context.Escola
+                Escolas = Escola
                 .OrderBy(p => p.NomeEscola)
                 .Skip((page - 1) * NUMERO_ESCOLAS_POR_PAGINA)
                 .Take(NUMERO_ESCOLAS_POR_PAGINA),
