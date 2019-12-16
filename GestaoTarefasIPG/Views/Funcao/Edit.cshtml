@@ -19,15 +19,14 @@
                 <span asp-validation-for="NomeFuncao" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Gravar" class="btn btn-primary" />
+                <input type="submit" value="Gravar" class="btn btn-success" />
+                <a asp-action="Index" class="btn btn-primary">Voltar para a lista de funções</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Voltar para a lista de funções</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
