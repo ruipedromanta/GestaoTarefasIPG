@@ -13,7 +13,7 @@ namespace GestaoTarefasIPG.Controllers
     {
         private readonly IPGDbContext _context;
 
-        private const int NUMERO_ESCOLAS_POR_PAGINA = 2;
+        private const int NUMERO_ESCOLAS_POR_PAGINA = 10;
         private const int NUMERO_PAGINAS_ANTES_E_DEPOIS = 2;
 
         public EscolasController(IPGDbContext context)

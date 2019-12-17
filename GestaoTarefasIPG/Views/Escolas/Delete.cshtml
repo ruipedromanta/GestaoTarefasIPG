@@ -8,11 +8,10 @@
 
 <h3>Tem a certeza que pretende apagar?</h3>
 <div>
-    <h4>Escola</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NomeEscola)
+        <dt class="col-sm-2">
+            <label asp-for="NomeEscola" class="control-label">Nome da Escola</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.NomeEscola)
