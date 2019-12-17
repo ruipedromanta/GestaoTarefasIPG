@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 namespace GestaoTarefasIPG.Models {
     public class Escola {
         public int EscolaId { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Introduza o nome da escola por favor")]
         [StringLength(128)]
         public string NomeEscola { get; set; }
         [Required]
         [StringLength(9)]
+        [RegularExpression(@"2\d{8}",ErrorMessage = "Introduza um número de telefone válido")]
         public string Telefone { get; set; }
     }
 }
