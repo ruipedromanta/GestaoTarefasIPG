@@ -4,19 +4,19 @@
     ViewData["Title"] = "Index";
 }
 
-<h1 align="center">Consultar Departamentos</h1>
+<h1 align="center">Departamentos</h1>
 
 <p>
-    <a asp-action="Create" class="btn btn-sm btn-outline-success">Novo Departamento</a>
+    <a asp-action="Create" class="btn btn-sm btn-success">Criar Departamento</a>
 </p>
 
 @using (Html.BeginForm()) {
 
-    <p align="right">
-
-        @Html.TextBox("searchString")
-        <input type="submit" value="Procurar">
-    </p>
+<p align="right">
+    
+    @Html.TextBox("searchString")
+    <input type="submit" value="Procurar">
+</p>
 }
 
 <table class="table table table-info">
@@ -40,8 +40,8 @@
                 </td>
 
                 <td align="right">
-                    <a asp-action="Details" class="btn btn-sm btn-primary" asp-route-id="@item.DepartamentoId">Detalhes</a> |
                     <a asp-action="Edit" class="btn btn-sm btn-warning" asp-route-id="@item.DepartamentoId">Editar</a> |
+                    <a asp-action="Details" class="btn btn-sm btn-primary" asp-route-id="@item.DepartamentoId">Detalhes</a> |
                     <a asp-action="Delete" class="btn btn-sm btn-danger" asp-route-id="@item.DepartamentoId">Apagar</a>
                 </td>
             </tr>
