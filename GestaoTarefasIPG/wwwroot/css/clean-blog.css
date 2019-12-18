@@ -175,6 +175,9 @@ header.masthead {
   background-attachment: scroll;
   position: relative;
   background-size: cover;
+  height: 400px;
+  
+  
 }
 
 header.masthead .overlay {
