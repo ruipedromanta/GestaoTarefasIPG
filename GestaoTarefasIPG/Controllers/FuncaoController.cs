@@ -82,7 +82,7 @@ namespace GestaoTarefasIPG.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("FuncaoId,Nome da Funcão")] Funcao funcao)
+        public async Task<IActionResult> Create([Bind("FuncaoId,NomeFuncao")] Funcao funcao)
         {
             if (ModelState.IsValid)
             {
