@@ -86,10 +86,8 @@ namespace GestaoTarefasIPG.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("DepartamentoId,NomeDepartamento")] Departamento departamento)
-        {
-            if (ModelState.IsValid)
-            {
+        public async Task<IActionResult> Create([Bind("DepartamentoId,NomeDepartamento")] Departamento departamento) {
+            if (ModelState.IsValid) {
                 _context.Add(departamento);
                 await _context.SaveChangesAsync();
 
@@ -98,6 +96,28 @@ namespace GestaoTarefasIPG.Controllers
 
                 return View("Success");
             }
+            bool erro = false;
+
+            var NomeDepartamento = _context.Departamento
+                .FirstOrDefault(p => p.NomeDepartamento == departamento.NomeDepartamento);
+
+            if (NomeDepartamento != null) {
+                ViewBag.Nome = "O Nome " + departamento.NomeDepartamento + " já foi usado";
+                erro = true;
+            }
+
+            if (erro == false) {
+
+                ViewBag.Title = "O Departamento foi editado com sucesso";
+                ViewBag.Message = "O novo Departamento foi editado com sucesso";
+
+                return View("Success");
+
+            } else {
+                return View("Create");
+            }
+        
+
             return View(departamento);
         }
 
