@@ -21,7 +21,7 @@ namespace GestaoTarefasIPG.Controllers
         }
 
         // GET: Departamento
-        public IActionResult Index(int page = 1, string searchString = null) {
+        public async Task<IActionResult> Index(int page =1, string searchString ="", string sort = "true" ) {
             var departamento = from p in _context.Departamento
                                select p;
 
@@ -39,13 +39,20 @@ namespace GestaoTarefasIPG.Controllers
             }
 
             DepartamentoVModel dp = new DepartamentoVModel {
-                Departamento = departamento.OrderBy(p => p.NomeDepartamento).Skip((page -1) * PaginasTamanho).Take(PaginasTamanho),
+                Sort = sort,
                 PagAtual = page,
                 PriPagina = Math.Max(1, page - NUMERO_PAGINAS_ANTES_DEPOIS),
                 TotPaginas = (int)Math.Ceiling(nuDepartamento / PaginasTamanho)
             };
 
+            if (sort.Equals("true")) {
+                dp.Departamento = departamento.OrderBy(p => p.NomeDepartamento).Skip((page - 1) * PaginasTamanho).Take(PaginasTamanho);
+            } else {
+                dp.Departamento = departamento.OrderByDescending(p => p.NomeDepartamento).Skip((page - 1) * PaginasTamanho).Take(PaginasTamanho); 
+            }
+
             dp.UltPagina = Math.Min(dp.TotPaginas, page + NUMERO_PAGINAS_ANTES_DEPOIS);
+            dp.StringProcura = searchString;
 
             return View(dp);
         }
