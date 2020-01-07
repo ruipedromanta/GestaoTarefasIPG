@@ -91,7 +91,7 @@ namespace GestaoTarefasIPG.Controllers
                 //return RedirectToAction(nameof(Index));
 
                 ViewBag.Title = "Escola adicionada com sucesso";
-                ViewBag.Message = "Nova escola criada com sucesso";
+                //ViewBag.Message = "Nova escola criada com sucesso";
 
                 return View("Success");
             }
@@ -147,7 +147,7 @@ namespace GestaoTarefasIPG.Controllers
                 //return RedirectToAction(nameof(Index));
 
                 ViewBag.Title = "Escola editada com sucesso";
-                ViewBag.Message = "A escola foi editada com sucesso";
+                //ViewBag.Message = "A escola foi editada com sucesso";
 
                 return View("Success");
             }
@@ -183,7 +183,7 @@ namespace GestaoTarefasIPG.Controllers
             //return RedirectToAction(nameof(Index));
 
             ViewBag.Title = "Escola apagada com sucesso";
-            ViewBag.Message = "A escola foi apagada com sucesso";
+            //ViewBag.Message = "A escola foi apagada com sucesso";
 
             return View("Success");
         }
