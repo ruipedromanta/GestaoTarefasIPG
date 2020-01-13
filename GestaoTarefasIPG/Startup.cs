@@ -26,13 +26,45 @@ namespace GestaoTarefasIPG
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-           services.AddDbContext<ApplicationDbContext>(options =>
-               options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+        public void ConfigureServices(IServiceCollection services) {
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(
+                     Configuration.GetConnectionString("DefaultConnection")));
+
+            // services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            //.AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentity<IdentityUser, IdentityRole>()
+               .AddEntityFrameworkStores<ApplicationDbContext>()
+               .AddDefaultTokenProviders()
+               .AddDefaultUI();
+
+            services.Configure<IdentityOptions>(
+                options => {
+                    // Password settings
+                    options.Password.RequireDigit = true;
+                    options.Password.RequiredLength = 5;
+                    
+                    // Lockout
+                    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                    options.Lockout.MaxFailedAccessAttempts = 5;
+                    options.Lockout.AllowedForNewUsers = true;
+
+                    // Users
+                    options.User.RequireUniqueEmail = true;
+
+                    // Sign in
+                    options.SignIn.RequireConfirmedAccount = false;
+                }
+            );
+            services.AddAuthorization(
+                options => {
+                    options.AddPolicy(
+                        "GerirEscolas",
+                        policy => policy.RequireRole("admin")
+                    );
+                }
+            );
+
             services.AddControllersWithViews();
             services.AddRazorPages();
 
@@ -72,6 +104,8 @@ namespace GestaoTarefasIPG
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+
+            
 
             if (env.IsDevelopment()) {
                 using (var serviceScope = app.ApplicationServices.CreateScope()) {

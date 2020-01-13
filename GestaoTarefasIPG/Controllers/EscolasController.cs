@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GestaoTarefasIPG.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GestaoTarefasIPG.Controllers
 {
+    
     public class EscolasController : Controller
     {
         private readonly IPGDbContext _context;
@@ -54,6 +56,7 @@ namespace GestaoTarefasIPG.Controllers
         }
 
         // GET: Escolas/Details/5
+        
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -72,6 +75,7 @@ namespace GestaoTarefasIPG.Controllers
         }
 
         // GET: Escolas/Create
+        [Authorize(Policy = "GerirEscolas")]
         public IActionResult Create()
         {
             return View();
@@ -99,6 +103,7 @@ namespace GestaoTarefasIPG.Controllers
         }
 
         // GET: Escolas/Edit/5
+        [Authorize(Policy = "GerirEscolas")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -155,6 +160,7 @@ namespace GestaoTarefasIPG.Controllers
         }
 
         // GET: Escolas/Delete/5
+        [Authorize(Policy = "GerirEscolas")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
