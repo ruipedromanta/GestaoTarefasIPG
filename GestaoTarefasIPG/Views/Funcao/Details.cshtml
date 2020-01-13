@@ -6,20 +6,20 @@
 
 <h1>Detalhes</h1>
 
-<div>
-    <h4>Funcão</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
+<table class="table table-info">
+    <thead>
+        <tr>
+            <th>Nome da Função</th>
             
-           <label asp-for="NomeFuncao" class="control-label">Nome da Função</label>
-                
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NomeFuncao)
-        </dd>
-    </dl>
-</div>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Html.DisplayFor(model => model.NomeFuncao)</td>
+            
+        </tr>
+    </tbody>
+</table>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.FuncaoId" class="btn btn-warning">Editar</a> |
     <a asp-action="Index" class="btn btn-primary">Voltar</a>
