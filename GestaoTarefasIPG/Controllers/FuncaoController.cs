@@ -91,7 +91,7 @@ namespace GestaoTarefasIPG.Controllers
                 // return RedirectToAction(nameof(Index));
 
                 ViewBag.Title = "Funcão adicionada com sucesso";
-                ViewBag.Message = "Nova funcão criada com sucesso";
+                //ViewBag.Message = "Nova funcão criada com sucesso";
 
                 return View("Success");
             }
@@ -147,7 +147,7 @@ namespace GestaoTarefasIPG.Controllers
                 //return RedirectToAction(nameof(Index));
 
                 ViewBag.Title = "Funcão editada com sucesso";
-                ViewBag.Message = "A Funcão foi editada com sucesso";
+                //ViewBag.Message = "A Funcão foi editada com sucesso";
 
                 return View("Success");
             }
@@ -183,7 +183,7 @@ namespace GestaoTarefasIPG.Controllers
             //return RedirectToAction(nameof(Index));
 
             ViewBag.Title = "Funcão apagada com sucesso";
-            ViewBag.Message = "A Funcão foi apagada com sucesso";
+            //ViewBag.Message = "A Funcão foi apagada com sucesso";
 
             return View("Success");
         }
