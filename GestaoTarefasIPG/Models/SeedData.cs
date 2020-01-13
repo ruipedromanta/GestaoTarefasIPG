@@ -1,11 +1,13 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace GestaoTarefasIPG.Models {
     public static class SeedData {
-        
+
+        private const string ADMIN_ROLE = "admin";
         
         public static void AdicionaEscolas (IPGDbContext db) {
 
@@ -22,6 +24,26 @@ namespace GestaoTarefasIPG.Models {
 
             db.SaveChanges();
         }
-            
+
+        public static async Task PopulateUsersAsync(UserManager<IdentityUser> userManager) {
+            const string ADMIN_USERNAME = "admin@ipg.pt";
+            const string ADMIN_PASSWORD = "PI1920";
+
+            IdentityUser user = await userManager.FindByNameAsync(ADMIN_USERNAME);
+            if (user == null) {
+                user = new IdentityUser {
+                    UserName = ADMIN_USERNAME,
+                    Email = ADMIN_USERNAME
+                };
+
+                await userManager.CreateAsync(user, ADMIN_PASSWORD);
+            }
+
+            if (!await userManager.IsInRoleAsync(user, ADMIN_ROLE)) {
+                await userManager.AddToRoleAsync(user, ADMIN_ROLE);
+            }
+           
+        }
+
     }
 }
