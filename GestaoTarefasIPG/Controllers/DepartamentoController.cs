@@ -13,7 +13,7 @@ namespace GestaoTarefasIPG.Controllers
     {
         private readonly IPGDbContext _context;
 
-        public int PaginasTamanho = 5;
+        public int PaginasTamanho = 10;
 
         public DepartamentoController(IPGDbContext context)
         {
