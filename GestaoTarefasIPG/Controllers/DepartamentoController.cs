@@ -92,7 +92,7 @@ namespace GestaoTarefasIPG.Controllers
                 await _context.SaveChangesAsync();
 
                 ViewBag.Title = "O Departamento foi adicionado com sucesso";
-                ViewBag.Message = "O novo Departamento foi criado com sucesso";
+                ViewBag.Message = "Novo Departamento foi criado com sucesso";
 
                 return View("Success");
             }
@@ -109,7 +109,7 @@ namespace GestaoTarefasIPG.Controllers
             if (erro == false) {
 
                 ViewBag.Title = "O Departamento foi editado com sucesso";
-                ViewBag.Message = "O novo Departamento foi editado com sucesso";
+                ViewBag.Message = "Novo Departamento foi editado com sucesso";
 
                 return View("Success");
 
@@ -169,7 +169,7 @@ namespace GestaoTarefasIPG.Controllers
                 }
                 //return RedirectToAction(nameof(Index));
                 ViewBag.Title = "O Departamento foi editado com sucesso";
-                ViewBag.Message = "O novo Departamento foi editado com sucesso";
+                ViewBag.Message = "Novo Departamento foi editado com sucesso";
 
                 return View("Success");
 
@@ -205,7 +205,7 @@ namespace GestaoTarefasIPG.Controllers
             await _context.SaveChangesAsync();
             //return RedirectToAction(nameof(Index));
             ViewBag.Title = "O Departamento foi apagado com sucesso";
-            ViewBag.Message = "O novo Departamento foi apagado com sucesso";
+            ViewBag.Message = "Novo Departamento foi apagado com sucesso";
 
             return View("Success");
         }
