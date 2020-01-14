@@ -25,7 +25,7 @@ namespace GestaoTarefasIPG.Models {
             db.SaveChanges();
         }
 
-        public static async Task PopulateUsersAsync(UserManager<IdentityUser> userManager) {
+        public static async Task AdicionaUtilizadores(UserManager<IdentityUser> userManager) {
             const string ADMIN_USERNAME = "admin@ipg.pt";
             const string ADMIN_PASSWORD = "PI1920";
 
@@ -38,11 +38,18 @@ namespace GestaoTarefasIPG.Models {
 
                 await userManager.CreateAsync(user, ADMIN_PASSWORD);
             }
-
             if (!await userManager.IsInRoleAsync(user, ADMIN_ROLE)) {
                 await userManager.AddToRoleAsync(user, ADMIN_ROLE);
             }
-           
+
+
+        }
+
+        public static async Task CreateRolesAsync(RoleManager<IdentityRole> roleManager) {
+
+            if (!await roleManager.RoleExistsAsync(ADMIN_ROLE)) {
+                await roleManager.CreateAsync(new IdentityRole(ADMIN_ROLE));
+            }
         }
 
     }

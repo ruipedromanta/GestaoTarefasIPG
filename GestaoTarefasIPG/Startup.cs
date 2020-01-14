@@ -14,12 +14,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using GestaoTarefasIPG.Models;
 
-namespace GestaoTarefasIPG
-{
-    public class Startup
-    {
-        public Startup(IConfiguration configuration)
-        {
+namespace GestaoTarefasIPG {
+    public class Startup {
+        public Startup(IConfiguration configuration) {
             Configuration = configuration;
         }
 
@@ -40,10 +37,6 @@ namespace GestaoTarefasIPG
 
             services.Configure<IdentityOptions>(
                 options => {
-                    // Password settings
-                    options.Password.RequireDigit = true;
-                    options.Password.RequiredLength = 5;
-                    
                     // Lockout
                     options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
                     options.Lockout.MaxFailedAccessAttempts = 5;
@@ -71,20 +64,17 @@ namespace GestaoTarefasIPG
             services.AddDbContext<IPGDbContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("IPGDbContext")));
 
-       
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
-          
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,UserManager<IdentityUser> userManager,
+            RoleManager<IdentityRole> roleManager) {
+            if (env.IsDevelopment()) {
+
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
-            }
-            else
-            {
+            } else {
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
@@ -97,15 +87,14 @@ namespace GestaoTarefasIPG
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
+            app.UseEndpoints(endpoints => {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
 
-            
+            SeedData.CreateRolesAsync(roleManager).Wait();
 
             if (env.IsDevelopment()) {
                 using (var serviceScope = app.ApplicationServices.CreateScope()) {
@@ -113,6 +102,11 @@ namespace GestaoTarefasIPG
                     SeedData.AdicionaEscolas(db);
                 }
             }
+
+            //if (env.IsDevelopment()) {
+               // SeedData.AdicionaUtilizadores(userManager).Wait();
+                //SeedData.AdicionaEscolas(db);
+            //}
         }
     }
 }
