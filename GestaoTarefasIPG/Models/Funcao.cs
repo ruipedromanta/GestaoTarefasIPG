@@ -10,7 +10,7 @@ namespace GestaoTarefasIPG.Models {
         public int FuncaoId { get; set; }
 
         
-        [Required]
+        [Required(ErrorMessage = "Indique um nome válido para a função")]
         [StringLength(128)]
         public string NomeFuncao { get; set; }
 
