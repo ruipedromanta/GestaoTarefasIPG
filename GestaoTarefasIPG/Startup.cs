@@ -28,8 +28,7 @@ namespace GestaoTarefasIPG {
                 options.UseSqlServer(
                      Configuration.GetConnectionString("DefaultConnection")));
 
-            // services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-            //.AddEntityFrameworkStores<ApplicationDbContext>();
+            
             services.AddIdentity<IdentityUser, IdentityRole>()
                .AddEntityFrameworkStores<ApplicationDbContext>()
                .AddDefaultTokenProviders()
@@ -37,6 +36,14 @@ namespace GestaoTarefasIPG {
 
             services.Configure<IdentityOptions>(
                 options => {
+
+                    // Password settings
+                    options.Password.RequireDigit = true;
+                    options.Password.RequiredLength = 6;
+                    options.Password.RequireNonAlphanumeric = true;
+                    options.Password.RequireUppercase = true;
+                    options.Password.RequireLowercase = true;
+
                     // Lockout
                     options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
                     options.Lockout.MaxFailedAccessAttempts = 5;
@@ -101,7 +108,7 @@ namespace GestaoTarefasIPG {
                 using (var serviceScope = app.ApplicationServices.CreateScope()) {
                     var db = serviceScope.ServiceProvider.GetService<IPGDbContext>();
                     SeedData.AdicionaEscolas(db);
-                    SeedData.AdicionaUtilizadoresAsync(userManager);
+                    SeedData.PopulateUsersAsync(userManager).Wait();
                 }
             }
 
