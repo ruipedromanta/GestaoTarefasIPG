@@ -94,12 +94,13 @@ namespace GestaoTarefasIPG {
                 endpoints.MapRazorPages();
             });
 
-            SeedData.CreateRolesAsync(roleManager).Wait();
+            //SeedData.CreateRolesAsync(roleManager).Wait();
 
             if (env.IsDevelopment()) {
                 using (var serviceScope = app.ApplicationServices.CreateScope()) {
                     var db = serviceScope.ServiceProvider.GetService<IPGDbContext>();
                     SeedData.AdicionaEscolas(db);
+                    SeedData.AdicionaUtilizadoresAsync(userManager);
                 }
             }
 
