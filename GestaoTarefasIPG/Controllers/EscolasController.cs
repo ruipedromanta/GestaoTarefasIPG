@@ -24,7 +24,8 @@ namespace GestaoTarefasIPG.Controllers
         // GET: Escolas
         //public async Task<IActionResult> Index(int page = 1){
 
-        public IActionResult Index(int page=1, string searchString = null) {
+        //public IActionResult Index(int page=1, string searchString = null) {
+        public async Task<IActionResult> Index(int page = 1, string searchString = "", string sort = "true") {
             var Escola = from p in _context.Escola select p;
 
             if (!String.IsNullOrEmpty(searchString)) {
@@ -36,10 +37,7 @@ namespace GestaoTarefasIPG.Controllers
         decimal numeroEscolas = _context.Escola.Count();
 
             EscolasViewModel vm = new EscolasViewModel {
-                Escolas = Escola
-                .OrderBy(p => p.NomeEscola)
-                .Skip((page - 1) * NUMERO_ESCOLAS_POR_PAGINA)
-                .Take(NUMERO_ESCOLAS_POR_PAGINA),
+                Sort = sort,
 
                 CurrentPage = page,
 
@@ -47,6 +45,14 @@ namespace GestaoTarefasIPG.Controllers
 
                 TotalPages = (int)Math.Ceiling(numeroEscolas / NUMERO_ESCOLAS_POR_PAGINA)
             };
+
+            if (sort.Equals("true")) {
+                vm.Escolas = Escola.OrderBy(p => p.NomeEscola).Skip((page - 1) * NUMERO_ESCOLAS_POR_PAGINA).Take(NUMERO_ESCOLAS_POR_PAGINA);
+            } else {
+                vm.Escolas = Escola.OrderByDescending(p => p.NomeEscola).Skip((page - 1) * NUMERO_ESCOLAS_POR_PAGINA).Take(NUMERO_ESCOLAS_POR_PAGINA);
+            }
+
+            vm.StringProcura = searchString;
 
             vm.LastPageShow = Math.Min(vm.TotalPages, page + NUMERO_PAGINAS_ANTES_E_DEPOIS);
 
