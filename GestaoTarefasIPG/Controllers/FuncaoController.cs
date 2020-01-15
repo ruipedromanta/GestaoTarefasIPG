@@ -24,7 +24,7 @@ namespace GestaoTarefasIPG.Controllers
         // GET: Funcao
         //public async Task<IActionResult> Index(int page = 1){
 
-        public IActionResult Index(int page = 1, string searchString = null) {
+            public async Task<IActionResult> Index(int page = 1, string searchString = "", string sort = "true") {
             var Funcao = from p in _context.Funcao select p;
 
             if (!String.IsNullOrEmpty(searchString)) {
@@ -36,10 +36,7 @@ namespace GestaoTarefasIPG.Controllers
             decimal numeroFuncoes = _context.Funcao.Count();
 
             FuncoesViewModel vm = new FuncoesViewModel {
-                Funcoes = Funcao
-                .OrderBy(p => p.NomeFuncao)
-                .Skip((page - 1) * NUMERO_FUNCOES_POR_PAGINA)
-                .Take(NUMERO_FUNCOES_POR_PAGINA),
+                Sort = sort,
 
                 PaginaAtual = page,
 
@@ -48,7 +45,14 @@ namespace GestaoTarefasIPG.Controllers
                 TotalPaginas = (int)Math.Ceiling(numeroFuncoes / NUMERO_FUNCOES_POR_PAGINA)
             };
 
+            if (sort.Equals("true")) {
+                vm.Funcoes = Funcao.OrderBy(p => p.NomeFuncao).Skip((page - 1) * NUMERO_FUNCOES_POR_PAGINA).Take(NUMERO_FUNCOES_POR_PAGINA);
+            } else {
+                vm.Funcoes = Funcao.OrderByDescending(p => p.NomeFuncao).Skip((page - 1) * NUMERO_FUNCOES_POR_PAGINA).Take(NUMERO_FUNCOES_POR_PAGINA);
+            }
+
             vm.UltimaPagina = Math.Min(vm.TotalPaginas, page + NUMERO_PAGINAS_ANTES_E_DEPOIS);
+            vm.StringProcura = searchString;
 
             return View(vm);
         }
@@ -110,7 +114,7 @@ namespace GestaoTarefasIPG.Controllers
             if (funcao == null)
             {
                 return NotFound();
-            }
+            }   
             return View(funcao);
         }
 
