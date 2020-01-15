@@ -11,17 +11,34 @@
 </p>
 
 @using (Html.BeginForm()) {
-    <p align="right">
-        @Html.TextBox("searchString")
-        <input type="submit" value="Procurar" />
-    </p>
+<p align="right">
+    <input type="text" name="searchString" value="@Model.StringProcura" />
+    <button type="submit" asp-action="Index" asp-route-page="1" asp-route-searchString="@Model.StringProcura">Procurar</button>
+</p>
 }
+
+<script>
+    function sort() {
+        let sort = @Model.Sort;
+        let stringProcura = '@Model.StringProcura';
+        var result = "true".localeCompare(sort);
+        console.log('antes - ' + sort);
+        if (result == 0) {
+            sort = "false";
+        } else {
+            sort = "true";
+        }
+        console.log('depois - ' + sort);
+        const url = 'https://' + window.location.host + '/Escolas?page=1&sort=' + sort + '&searchString=' + stringProcura;
+        console.log('url - ' + url)
+        window.location.replace(url);
+    }
+</script>
 
 <table class="table table-info">
     <thead>
         <tr>
-           
-            <th>Escola</th>
+            <th><a onclick="sort()">Escola</a></th>
             <th align="center">Telefone</th>
         </tr>
     </thead>

@@ -10,9 +10,7 @@ namespace GestaoTarefasIPG.Models {
         public int TotalPages { get; set; }
         public int FirstPageShow { get; set; }
         public int LastPageShow { get; set; }
-
         public string StringProcura { get; set; }
-
         public string Sort { get; set; }
     }
 }
