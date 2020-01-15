@@ -100,14 +100,11 @@ namespace GestaoTarefasIPG {
                 using (var serviceScope = app.ApplicationServices.CreateScope()) {
                     var db = serviceScope.ServiceProvider.GetService<IPGDbContext>();
                     SeedData.AdicionaEscolas(db);
-                    SeedData.AdicionaUtilizadoresAsync(userManager);
+                    SeedData.AdicionaUtilizadoresAsync(userManager).Wait();
                 }
             }
 
-            //if (env.IsDevelopment()) {
-               // SeedData.AdicionaUtilizadores(userManager).Wait();
-                //SeedData.AdicionaEscolas(db);
-            //}
+            
         }
     }
 }
