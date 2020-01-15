@@ -64,6 +64,7 @@ namespace GestaoTarefasIPG {
             services.AddDbContext<IPGDbContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("IPGDbContext")));
 
+            
 
         }
 
@@ -100,7 +101,7 @@ namespace GestaoTarefasIPG {
                 using (var serviceScope = app.ApplicationServices.CreateScope()) {
                     var db = serviceScope.ServiceProvider.GetService<IPGDbContext>();
                     SeedData.AdicionaEscolas(db);
-                    SeedData.AdicionaUtilizadoresAsync(userManager).Wait();
+                    SeedData.AdicionaUtilizadoresAsync(userManager);
                 }
             }
 
