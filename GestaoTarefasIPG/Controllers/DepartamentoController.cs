@@ -96,6 +96,7 @@ namespace GestaoTarefasIPG.Controllers
 
                 return View("Success");
             }
+           
             bool erro = false;
 
             var NomeDepartamento = _context.Departamento
@@ -118,7 +119,7 @@ namespace GestaoTarefasIPG.Controllers
             }
         
 
-            return View(departamento);
+            
         }
 
         // GET: Departamento/Edit/5
