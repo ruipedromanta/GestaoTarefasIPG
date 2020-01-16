@@ -1,7 +1,7 @@
 ﻿@page
 @model ExternalLoginModel
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Registar";
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -9,9 +9,8 @@
 <hr />
 
 <p class="text-info">
-    You've successfully authenticated with <strong>@Model.LoginProvider</strong>.
-    Please enter an email address for this site below and click the Register button to finish
-    logging in.
+    Registou-se com sucesso com o seu  <strong>@Model.LoginProvider</strong>.
+    Por favor introduza um endereço de email para o site e clique no botão registar para confrimar o seu registo.
 </p>
 
 <div class="row">
@@ -19,11 +18,11 @@
         <form asp-page-handler="Confirmation" asp-route-returnUrl="@Model.ReturnUrl" method="post">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Input.Email"></label>
+                Introduza o seu email:
                 <input asp-for="Input.Email" class="form-control" />
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
-            <button type="submit" class="btn btn-primary">Register</button>
+            <button type="submit" class="btn btn-primary">Registar</button>
         </form>
     </div>
 </div>

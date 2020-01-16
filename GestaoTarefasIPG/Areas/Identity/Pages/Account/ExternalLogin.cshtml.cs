@@ -98,7 +98,7 @@ namespace GestaoTarefasIPG.Areas.Identity.Pages.Account {
             // Get the information about the user from the external login provider
             var info = await _signInManager.GetExternalLoginInfoAsync();
             if (info == null) {
-                ErrorMessage = "Error loading external login information during confirmation.";
+                ErrorMessage = "Erro a carregar informação externa durante a confirmação.";
                 return RedirectToPage("./Login", new { ReturnUrl = returnUrl });
             }
 
@@ -120,8 +120,8 @@ namespace GestaoTarefasIPG.Areas.Identity.Pages.Account {
                             values: new { area = "Identity", userId = userId, code = code },
                             protocol: Request.Scheme);
 
-                        await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                            $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                        await _emailSender.SendEmailAsync(Input.Email, "Confirme o seu email",
+                            $"Confirme a sua conta<a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>carregando aqui</a>.");
 
                         return LocalRedirect(returnUrl);
                     }

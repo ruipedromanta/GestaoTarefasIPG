@@ -30,13 +30,13 @@ namespace GestaoTarefasIPG.Areas.Identity.Pages.Account {
 
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null) {
-                return NotFound($"Unable to load user with ID '{userId}'.");
+                return NotFound($"Impossivel carregar o utilizador com o ID '{userId}'.");
             }
 
             code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
             var result = await _userManager.ChangeEmailAsync(user, email, code);
             if (!result.Succeeded) {
-                StatusMessage = "Error changing email.";
+                StatusMessage = "Erro a mudar o email.";
                 return Page();
             }
 
@@ -44,12 +44,12 @@ namespace GestaoTarefasIPG.Areas.Identity.Pages.Account {
             // we need to update the user name.
             var setUserNameResult = await _userManager.SetUserNameAsync(user, email);
             if (!setUserNameResult.Succeeded) {
-                StatusMessage = "Error changing user name.";
+                StatusMessage = "Erro a mudar o nome de utilizador.";
                 return Page();
             }
 
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Thank you for confirming your email change.";
+            StatusMessage = "Obrigado por consfirmar a mudança de email.";
             return Page();
         }
     }
