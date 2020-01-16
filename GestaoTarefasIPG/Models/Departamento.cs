@@ -9,8 +9,10 @@ namespace GestaoTarefasIPG.Models {
 
         [Required]
         public int DepartamentoId { get; set; }
-        [Required]
-        [StringLength(120)]
+        
+        [StringLength(20)]
+        [Required(ErrorMessage = "Introduza o nome do departamento por favor")]
+        [MinLength(3, ErrorMessage = "O nome tem de ter menos de 3 carateres")]
         public string NomeDepartamento { get; set; }
         
     }

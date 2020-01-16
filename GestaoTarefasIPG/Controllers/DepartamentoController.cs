@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GestaoTarefasIPG.Models;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace GestaoTarefasIPG.Controllers
 {
@@ -76,6 +78,8 @@ namespace GestaoTarefasIPG.Controllers
         }
 
         // GET: Departamento/Create
+        //[Authorize(Policy = "Gerir")]
+        //[Authorize(Roles = "admin")]
         public IActionResult Create()
         {
             return View();
@@ -86,6 +90,7 @@ namespace GestaoTarefasIPG.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        //[Authorize(Roles = "admin")]
         public async Task<IActionResult> Create([Bind("DepartamentoId,NomeDepartamento")] Departamento departamento) {
             if (ModelState.IsValid) {
                 _context.Add(departamento);
@@ -123,6 +128,8 @@ namespace GestaoTarefasIPG.Controllers
         }
 
         // GET: Departamento/Edit/5
+        //[Authorize(Policy = "Gerir")]
+        //[Authorize(Roles = "admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -143,6 +150,7 @@ namespace GestaoTarefasIPG.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        //[Authorize(Roles = "admin")]
         public async Task<IActionResult> Edit(int id, [Bind("DepartamentoId,NomeDepartamento")] Departamento departamento)
         {
             if (id != departamento.DepartamentoId)
@@ -179,6 +187,8 @@ namespace GestaoTarefasIPG.Controllers
         }
 
         // GET: Departamento/Delete/5
+        //[Authorize(Policy = "Gerir")]
+        //[Authorize(Roles = "admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -199,6 +209,7 @@ namespace GestaoTarefasIPG.Controllers
         // POST: Departamento/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        //[Authorize(Roles = "admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var departamento = await _context.Departamento.FindAsync(id);

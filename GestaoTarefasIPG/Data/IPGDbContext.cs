@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using GestaoTarefasIPG.Models;
 
 namespace GestaoTarefasIPG.Models
 {
@@ -14,5 +15,9 @@ namespace GestaoTarefasIPG.Models
         }
 
         public DbSet<GestaoTarefasIPG.Models.Departamento> Departamento { get; set; }
+
+        public DbSet<GestaoTarefasIPG.Models.Escola> Escola { get; set; }
+
+        public DbSet<GestaoTarefasIPG.Models.Funcao> Funcao { get; set; }
     }
 }

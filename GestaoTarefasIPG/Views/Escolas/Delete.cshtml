@@ -1,0 +1,31 @@
+﻿@model GestaoTarefasIPG.Models.Escola
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Tem a certeza que pretende apagar?</h1>
+
+<table class="table table-warning">
+    <thead>
+        <tr>
+            <th>Nome da Escola</th>
+            <th align="center">Telefone</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Html.DisplayFor(model => model.NomeEscola)</td>
+            <td>@Html.DisplayFor(model => model.Telefone)</td>
+        </tr>
+    </tbody>
+</table>
+
+<div>
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="EscolaId" />
+        <input type="submit" value="Apagar" class="btn btn-danger" /> |
+        <a asp-action="Index" class="btn btn-primary">Voltar</a>
+    </form>
+</div>
+

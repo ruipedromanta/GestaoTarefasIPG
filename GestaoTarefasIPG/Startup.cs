@@ -64,7 +64,7 @@ namespace GestaoTarefasIPG
             services.AddAuthorization(
              options => {
                  options.AddPolicy(
-                     "CanManageGestaoIpg",
+                     "Gerir",
                      policy => policy.RequireRole("admin")
                  );
 
@@ -88,6 +88,8 @@ namespace GestaoTarefasIPG
                 using (var ServiceScope = app.ApplicationServices.CreateScope()) {
                     var db = ServiceScope.ServiceProvider.GetService<IPGDbContext>();
                     SeedData.AdicionaDepartamentos(db);
+                    SeedData.AdicionaEscolas(db);
+                    SeedData.AdicionaFuncoes(db);
                     SeedData.PopulateUsersAsync(userManager).Wait();
                 }
                 app.UseDeveloperExceptionPage();
