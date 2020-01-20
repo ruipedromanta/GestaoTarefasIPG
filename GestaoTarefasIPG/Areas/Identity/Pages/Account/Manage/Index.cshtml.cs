@@ -75,7 +75,7 @@ namespace GestaoTarefasIPG.Areas.Identity.Pages.Account.Manage {
             }
 
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Your profile has been updated";
+            StatusMessage = "O seu perfil foi atualizado com sucesso";
             return RedirectToPage();
         }
     }
