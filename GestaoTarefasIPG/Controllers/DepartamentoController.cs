@@ -56,6 +56,8 @@ namespace GestaoTarefasIPG.Controllers
             dp.UltPagina = Math.Min(dp.TotPaginas, page + NUMERO_PAGINAS_ANTES_DEPOIS);
             dp.StringProcura = searchString;
 
+
+            //var IPGDbContext = _context.Departamento.Include(p => p.Escolas);
             return View(dp);
         }
 
@@ -68,6 +70,7 @@ namespace GestaoTarefasIPG.Controllers
             }
 
             var departamento = await _context.Departamento
+                //.Include(p => p.Escolas)
                 .FirstOrDefaultAsync(m => m.DepartamentoId == id);
             if (departamento == null)
             {
@@ -82,6 +85,8 @@ namespace GestaoTarefasIPG.Controllers
         
         public IActionResult Create()
         {
+            //ViewData["EscolaId"] = new SelectList(_context.Escola, "EscolaId", "NomeEscola", "Telefone");
+
             return View();
         }
 
@@ -91,7 +96,7 @@ namespace GestaoTarefasIPG.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         //[Authorize(Roles = "admin")]
-        public async Task<IActionResult> Create([Bind("DepartamentoId,NomeDepartamento")] Departamento departamento) {
+        public async Task<IActionResult> Create([Bind("DepartamentoId,NomeDepartamento, EscolaId")] Departamento departamento) {
             if (ModelState.IsValid) {
 
                 if (_context.Departamento.FirstOrDefault(p => p.NomeDepartamento == departamento.NomeDepartamento) == null) {
@@ -109,12 +114,12 @@ namespace GestaoTarefasIPG.Controllers
 
                 }
              }
-            bool erro = false;
+            
 
             var NomeDepartamento = _context.Departamento
                 .FirstOrDefault(p => p.NomeDepartamento == departamento.NomeDepartamento);
 
-
+            //ViewData["EscolaId"] = new SelectList(_context.Escola, "EscolaId", "NomeEscola", "Telefone");
             return View(departamento);
         
 
@@ -136,6 +141,7 @@ namespace GestaoTarefasIPG.Controllers
             {
                 return NotFound();
             }
+            //ViewData["EscolaId"] = new SelectList(_context.Escola, "EscolaId", "NomeEscola", "Telefone");
             return View(departamento);
         }
 
@@ -183,6 +189,7 @@ namespace GestaoTarefasIPG.Controllers
                
 
             }
+            ViewData["EscolaId"] = new SelectList(_context.Escola, "EscolaId", "NomeEscola", "Telefone");
             return View(departamento);
         }
 
@@ -197,6 +204,7 @@ namespace GestaoTarefasIPG.Controllers
             }
 
             var departamento = await _context.Departamento
+                //.Include(p => p.Escolas)
                 .FirstOrDefaultAsync(m => m.DepartamentoId == id);
             if (departamento == null)
             {

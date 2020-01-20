@@ -19,5 +19,19 @@ namespace GestaoTarefasIPG.Models
         public DbSet<GestaoTarefasIPG.Models.Escola> Escola { get; set; }
 
         public DbSet<GestaoTarefasIPG.Models.Funcao> Funcao { get; set; }
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder) {
+
+            //Relação 1 -> N
+           /* modelBuilder.Entity<Escola>()
+                .HasOne(p => p.Departamento)
+                .WithMany(p => p.Escolas)
+                .HasForeignKey(p => p.DepartamentoId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            base.OnModelCreating(modelBuilder);
+            */
+        }
     }
 }

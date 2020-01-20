@@ -18,5 +18,14 @@ namespace GestaoTarefasIPG.Models {
         [StringLength(9)]
         [RegularExpression(@"2\d{8}", ErrorMessage = "Introduza um número de telefone válido")]
         public string Telefone { get; set; }
+
+        
+        //public int DepartamentoId { get; set; }
+
+
+        //public Departamento Departamento { get; set; }
+
+
+        //public ICollection<Departamento> Departamentos { get; set; }
     }
 }
