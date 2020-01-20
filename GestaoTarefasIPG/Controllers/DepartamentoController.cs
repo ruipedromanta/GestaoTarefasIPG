@@ -85,7 +85,7 @@ namespace GestaoTarefasIPG.Controllers
         
         public IActionResult Create()
         {
-            //ViewData["EscolaId"] = new SelectList(_context.Escola, "EscolaId", "NomeEscola", "Telefone");
+           // ViewData["EscolaId"] = new SelectList(_context.Escola, "EscolaId", "NomeEscola", "Telefone");
 
             return View();
         }
@@ -96,7 +96,7 @@ namespace GestaoTarefasIPG.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         //[Authorize(Roles = "admin")]
-        public async Task<IActionResult> Create([Bind("DepartamentoId,NomeDepartamento, EscolaId")] Departamento departamento) {
+        public async Task<IActionResult> Create([Bind("DepartamentoId,NomeDepartamento,EscolaId")] Departamento departamento) {
             if (ModelState.IsValid) {
 
                 if (_context.Departamento.FirstOrDefault(p => p.NomeDepartamento == departamento.NomeDepartamento) == null) {
@@ -109,6 +109,7 @@ namespace GestaoTarefasIPG.Controllers
 
 
                     ModelState.AddModelError("NomeDepartamento", "Não é possível adicionar nomes repetidos.");
+                   // ViewData["EscolaId"] = new SelectList(_context.Escola, "EscolaId", "NomeEscola", "Telefone", departamento.EscolaId);
                     return View(departamento);
 
 

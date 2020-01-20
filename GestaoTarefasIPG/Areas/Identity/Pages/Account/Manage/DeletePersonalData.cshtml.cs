@@ -51,7 +51,7 @@ namespace GestaoTarefasIPG.Areas.Identity.Pages.Account.Manage {
             RequirePassword = await _userManager.HasPasswordAsync(user);
             if (RequirePassword) {
                 if (!await _userManager.CheckPasswordAsync(user, Input.Password)) {
-                    ModelState.AddModelError(string.Empty, "Incorrect password.");
+                    ModelState.AddModelError(string.Empty, "Password Incorreta.");
                     return Page();
                 }
             }

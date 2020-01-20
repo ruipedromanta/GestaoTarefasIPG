@@ -15,7 +15,7 @@ namespace GestaoTarefasIPG.Models {
                 return;
             }
             db.Departamento.AddRange(
-                new Departamento { NomeDepartamento = "Secretaria" },
+                new Departamento { NomeDepartamento = "Secretaria"},
                 new Departamento { NomeDepartamento = "Tesouraria" },
                 new Departamento { NomeDepartamento = "Reprografia" },
                 new Departamento { NomeDepartamento = "Serviços Sociais" },
