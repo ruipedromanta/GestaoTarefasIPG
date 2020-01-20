@@ -93,35 +93,29 @@ namespace GestaoTarefasIPG.Controllers
         //[Authorize(Roles = "admin")]
         public async Task<IActionResult> Create([Bind("DepartamentoId,NomeDepartamento")] Departamento departamento) {
             if (ModelState.IsValid) {
-                _context.Add(departamento);
-                await _context.SaveChangesAsync();
 
-                ViewBag.Title = "O Departamento foi adicionado com sucesso";
-                ViewBag.Message = "Novo Departamento foi criado com sucesso";
+                if (_context.Departamento.FirstOrDefault(p => p.NomeDepartamento == departamento.NomeDepartamento) == null) {
+                    _context.Add(departamento);
+                    await _context.SaveChangesAsync();
+                    ViewBag.Title = "O Departamento foi editado com sucesso";
+                    
+                    return View("Success");
+                } else {
 
-                return View("Success");
-            }
-           
+
+                    ModelState.AddModelError("NomeDepartamento", "Não é possível adicionar nomes repetidos.");
+                    return View(departamento);
+
+
+                }
+             }
             bool erro = false;
 
             var NomeDepartamento = _context.Departamento
                 .FirstOrDefault(p => p.NomeDepartamento == departamento.NomeDepartamento);
 
-            if (NomeDepartamento != null) {
-                ViewBag.Nome = "O Nome " + departamento.NomeDepartamento + " já foi usado";
-                erro = true;
-            }
 
-            if (erro == false) {
-
-                ViewBag.Title = "O Departamento foi editado com sucesso";
-                ViewBag.Message = "Novo Departamento foi editado com sucesso";
-
-                return View("Success");
-
-            } else {
-                return View("Create");
-            }
+            return View(departamento);
         
 
             
@@ -160,27 +154,33 @@ namespace GestaoTarefasIPG.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(departamento);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!DepartamentoExists(departamento.DepartamentoId))
-                    {
-                        return NotFound();
+                try {
+                    if (_context.Departamento.FirstOrDefault(p => p.NomeDepartamento == departamento.NomeDepartamento) == null) {
+                        _context.Update(departamento);
+                        await _context.SaveChangesAsync();
+                        ViewBag.Title = "O Departamento foi editado com sucesso";
+
+                        return View("Success");
+                    } else {
+                        // aparece a mensagem de erro em baixo do input do Nome
+                        ModelState.AddModelError("NomeDepartamento", "Não é possível adicionar nomes repetidos.");
+                        return View(departamento);
+                        {
+
+                        }
+                    ViewBag.Title = "O Departamento foi editado com sucesso";
+
+                        return View("Edit");
                     }
-                    else
-                    {
+                } catch (DbUpdateConcurrencyException) {
+                    if (!DepartamentoExists(departamento.DepartamentoId)) {
+                        return NotFound();
+                    } else {
                         throw;
                     }
                 }
-                //return RedirectToAction(nameof(Index));
-                ViewBag.Title = "O Departamento foi editado com sucesso";
-                ViewBag.Message = "Novo Departamento foi editado com sucesso";
-
-                return View("Success");
+                
+               
 
             }
             return View(departamento);

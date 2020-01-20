@@ -11,7 +11,7 @@ namespace GestaoTarefasIPG.Controllers {
     public class FuncaoController : Controller {
         private readonly IPGDbContext _context;
 
-        private const int NUMERO_FUNCOES_POR_PAGINA = 3;
+        private const int NUMERO_FUNCOES_POR_PAGINA = 10;
         private const int NUMERO_PAGINAS_ANTES_E_DEPOIS = 2;
 
         public FuncaoController(IPGDbContext context) {
@@ -111,7 +111,7 @@ namespace GestaoTarefasIPG.Controllers {
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("FuncaoId,Nome da Funcão")] Funcao funcao) {
+        public async Task<IActionResult> Edit(int id, [Bind("FuncaoId,NomeFuncao")] Funcao funcao) {
             if (id != funcao.FuncaoId) {
                 return NotFound();
             }
