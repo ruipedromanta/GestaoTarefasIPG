@@ -88,16 +88,20 @@ namespace GestaoTarefasIPG.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("FuncaoId,NomeFuncao")] Funcao funcao)
         {
-            if (ModelState.IsValid)
+            
             {
-                _context.Add(funcao);
-                await _context.SaveChangesAsync();
-                // return RedirectToAction(nameof(Index));
+                
 
-                ViewBag.Title = "Funcão adicionada com sucesso";
-                //ViewBag.Message = "Nova funcão criada com sucesso";
-
-                return View("Success");
+                    if (_context.Funcao.FirstOrDefault(m => m.NomeFuncao == funcao.NomeFuncao) == null) {
+                    _context.Add(funcao);
+                    await _context.SaveChangesAsync();
+                    ViewBag.Title = "Nova funcão criada com sucesso";
+                    return View("Success");
+                } else {
+                    
+                    ModelState.AddModelError("NomeFuncao", "A função que pretende criar já existe.");
+                    
+                }
             }
             return View(funcao);
         }
@@ -134,8 +138,20 @@ namespace GestaoTarefasIPG.Controllers
             {
                 try
                 {
-                    _context.Update(funcao);
-                    await _context.SaveChangesAsync();
+                    /* _context.Update(funcao);
+                     await _context.SaveChangesAsync();*/
+
+                    // se isto for null é porque não encontrou nenhum registo na tabela Escola com o mesmo Nome
+                    if (_context.Funcao.FirstOrDefault(m => m.NomeFuncao == funcao.NomeFuncao) == null) {
+                        _context.Update(funcao);
+                        await _context.SaveChangesAsync();
+                        ViewBag.Title = "Nova funcão criada com sucesso";
+                        return View("Success");
+                    } else {
+                        // aparece a mensagem de erro em baixo do input do Nome
+                        ModelState.AddModelError("NomeFuncao", "A função que pretende criar já existe");
+                        return View(funcao);
+                    }
                 }
                 catch (DbUpdateConcurrencyException)
                 {
