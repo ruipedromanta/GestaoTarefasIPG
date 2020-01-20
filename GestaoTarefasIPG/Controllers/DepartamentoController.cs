@@ -78,8 +78,8 @@ namespace GestaoTarefasIPG.Controllers
         }
 
         // GET: Departamento/Create
-        //[Authorize(Policy = "Gerir")]
-        //[Authorize(Roles = "admin")]
+        [Authorize(Policy = "Gerir")]
+        
         public IActionResult Create()
         {
             return View();
@@ -122,8 +122,8 @@ namespace GestaoTarefasIPG.Controllers
         }
 
         // GET: Departamento/Edit/5
-        //[Authorize(Policy = "Gerir")]
-        //[Authorize(Roles = "admin")]
+        [Authorize(Policy = "Gerir")]
+        
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -144,7 +144,7 @@ namespace GestaoTarefasIPG.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //[Authorize(Roles = "admin")]
+       
         public async Task<IActionResult> Edit(int id, [Bind("DepartamentoId,NomeDepartamento")] Departamento departamento)
         {
             if (id != departamento.DepartamentoId)
@@ -162,8 +162,8 @@ namespace GestaoTarefasIPG.Controllers
 
                         return View("Success");
                     } else {
-                        // aparece a mensagem de erro em baixo do input do Nome
-                        ModelState.AddModelError("NomeDepartamento", "Não é possível adicionar nomes repetidos.");
+                       
+                        ModelState.AddModelError("NomeDepartamento", "Não é possível adicionar departamentos com nomes repetidos.");
                         return View(departamento);
                         {
 
@@ -187,8 +187,8 @@ namespace GestaoTarefasIPG.Controllers
         }
 
         // GET: Departamento/Delete/5
-        //[Authorize(Policy = "Gerir")]
-        //[Authorize(Roles = "admin")]
+        [Authorize(Policy = "Gerir")]
+        
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -209,13 +209,12 @@ namespace GestaoTarefasIPG.Controllers
         // POST: Departamento/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        //[Authorize(Roles = "admin")]
+        
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var departamento = await _context.Departamento.FindAsync(id);
             _context.Departamento.Remove(departamento);
             await _context.SaveChangesAsync();
-            //return RedirectToAction(nameof(Index));
             ViewBag.Title = "O Departamento foi apagado com sucesso";
             ViewBag.Message = "Novo Departamento foi apagado com sucesso";
 

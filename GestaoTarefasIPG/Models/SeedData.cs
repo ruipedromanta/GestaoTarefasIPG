@@ -83,16 +83,18 @@ namespace GestaoTarefasIPG.Models {
 
                 await userManager.CreateAsync(user, ADMIN_PASSWORD);
             }
-        }
-        public static async Task CreateRolesAsync(RoleManager<IdentityRole> roleManager) {
-            //const string CAN_ADD_MENUS = "can_add_menus";
+            if (!await userManager.IsInRoleAsync(user, ADMIN_ROLE)) {
+                await userManager.AddToRoleAsync(user, ADMIN_ROLE);
+            }
 
+        }
+
+        public static async Task CreateRolesAsync(RoleManager<IdentityRole> roleManager) {
             if (!await roleManager.RoleExistsAsync(ADMIN_ROLE)) {
                 await roleManager.CreateAsync(new IdentityRole(ADMIN_ROLE));
             }
         }
     }
-}
-
-
+    }
+       
         

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GestaoTarefasIPG.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GestaoTarefasIPG.Controllers {
     public class FuncaoController : Controller {
@@ -70,6 +71,7 @@ namespace GestaoTarefasIPG.Controllers {
         }
 
         // GET: Funcao/Create
+        [Authorize(Policy = "Gerir")]
         public IActionResult Create() {
             return View();
         }
@@ -80,20 +82,26 @@ namespace GestaoTarefasIPG.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("FuncaoId,NomeFuncao")] Funcao funcao) {
-            if (ModelState.IsValid) {
+            if (_context.Funcao.FirstOrDefault(p => p.NomeFuncao == funcao.NomeFuncao) == null) {
                 _context.Add(funcao);
                 await _context.SaveChangesAsync();
-                // return RedirectToAction(nameof(Index));
-
-                ViewBag.Title = "Funcão adicionada com sucesso";
-                //ViewBag.Message = "Nova funcão criada com sucesso";
+                ViewBag.Title = "A Função foi criada com sucesso";
 
                 return View("Success");
+            } else {
+
+
+                ModelState.AddModelError("NomeFuncao", "Não é possível adicionar nomes repetidos.");
+                return View(funcao);
+
+
             }
+        
             return View(funcao);
         }
 
         // GET: Funcao/Edit/5
+        [Authorize(Policy = "Gerir")]
         public async Task<IActionResult> Edit(int? id) {
             if (id == null) {
                 return NotFound();
@@ -117,10 +125,23 @@ namespace GestaoTarefasIPG.Controllers {
             }
 
             if (ModelState.IsValid) {
-                try {
-                    _context.Update(funcao);
-                    await _context.SaveChangesAsync();
-                } catch (DbUpdateConcurrencyException) {
+                    try {
+                        if (_context.Funcao.FirstOrDefault(p => p.NomeFuncao == funcao.NomeFuncao) == null) {
+                            _context.Update(funcao);
+                            await _context.SaveChangesAsync();
+                            ViewBag.Title = "A Função foi editado com sucesso";
+
+                            return View("Success");
+                        } else {
+                            
+                            ModelState.AddModelError("NomeFuncao", "Não é possível adicionar funções com nomes repetidos.");
+                            return View(funcao);
+                            {
+
+                            }
+                          
+                        }
+                    } catch (DbUpdateConcurrencyException) {
                     if (!FuncaoExists(funcao.FuncaoId)) {
                         return NotFound();
                     } else {
@@ -138,6 +159,7 @@ namespace GestaoTarefasIPG.Controllers {
         }
 
         // GET: Funcao/Delete/5
+        [Authorize(Policy = "Gerir")]
         public async Task<IActionResult> Delete(int? id) {
             if (id == null) {
                 return NotFound();

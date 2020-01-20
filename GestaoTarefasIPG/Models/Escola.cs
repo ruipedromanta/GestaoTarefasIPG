@@ -11,7 +11,7 @@ namespace GestaoTarefasIPG.Models {
     public class Escola {
         public int EscolaId { get; set; }
         [Required(ErrorMessage = "Introduza o nome da escola por favor")]
-        [MinLength(3, ErrorMessage = "O nome tem de ter menos de 3 carateres")]
+        [MinLength(10, ErrorMessage = "O nome tem de ter menos de 10 carateres")]
         [StringLength(128)]
         public string NomeEscola { get; set; }
         [Required]

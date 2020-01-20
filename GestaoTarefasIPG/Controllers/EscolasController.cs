@@ -74,6 +74,7 @@ namespace GestaoTarefasIPG.Controllers {
 
         // GET: Escolas/Create
         [Authorize(Policy = "Gerir")]
+
         public IActionResult Create() {
             return View();
         }
@@ -85,17 +86,34 @@ namespace GestaoTarefasIPG.Controllers {
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("EscolaId,NomeEscola,Telefone")] Escola escola) {
             if (ModelState.IsValid) {
-                _context.Add(escola);
-                await _context.SaveChangesAsync();
-                //return RedirectToAction(nameof(Index));
 
-                ViewBag.Title = "Escola adicionada com sucesso";
-                //ViewBag.Message = "Nova escola criada com sucesso";
+                if (_context.Escola.FirstOrDefault(p => p.NomeEscola == escola.NomeEscola) == null) {
+                    _context.Add(escola);
+                    
+                 if   (_context.Escola.Select(p => p.Telefone == escola.Telefone) == null) {
+                        _context.Add(escola);
+                    }
+                    await _context.SaveChangesAsync();
+                    ViewBag.Title = "A Escola foi criada com sucesso";
 
-                return View("Success");
+                    return View("Success");
+                } else {
+
+
+                    ModelState.AddModelError("NomeEscola","Não é possível adicionar escolas com nomes repetidos.");
+                    ModelState.AddModelError("Telefone", "Não é possível adicionar escolas com nomes repetidos.");
+                    return View(escola);
+
+                   
+
+
+                }
+
+
             }
             return View(escola);
         }
+
 
         // GET: Escolas/Edit/5
         [Authorize(Policy = "Gerir")]
@@ -123,8 +141,23 @@ namespace GestaoTarefasIPG.Controllers {
 
             if (ModelState.IsValid) {
                 try {
-                    _context.Update(escola);
-                    await _context.SaveChangesAsync();
+                    if (_context.Escola.FirstOrDefault(p => p.NomeEscola == escola.NomeEscola) == null) {
+                        _context.Update(escola);
+                        await _context.SaveChangesAsync();
+                        ViewBag.Title = "A Escola foi editada com sucesso";
+
+                        return View("Success");
+                    } else {
+                        
+                        ModelState.AddModelError("NomeEscola", "Não é possível adicionar escolas com nomes repetidos.");
+                        return View(escola);
+                        {
+
+                        }
+                       
+
+                     
+                    }
                 } catch (DbUpdateConcurrencyException) {
                     if (!EscolaExists(escola.EscolaId)) {
                         return NotFound();
