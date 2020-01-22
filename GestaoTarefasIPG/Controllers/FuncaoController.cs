@@ -13,7 +13,7 @@ namespace GestaoTarefasIPG.Controllers
     {
         private readonly IPGDbContext _context;
 
-        private const int NUMERO_FUNCOES_POR_PAGINA = 3;
+        private const int NUMERO_FUNCOES_POR_PAGINA = 10;
         private const int NUMERO_PAGINAS_ANTES_E_DEPOIS = 2;
 
         public FuncaoController(IPGDbContext context)
@@ -127,7 +127,7 @@ namespace GestaoTarefasIPG.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("FuncaoId,Nome da Funcão")] Funcao funcao)
+        public async Task<IActionResult> Edit(int id, [Bind("FuncaoId,NomeFuncao")] Funcao funcao)
         {
             if (id != funcao.FuncaoId)
             {
@@ -145,7 +145,7 @@ namespace GestaoTarefasIPG.Controllers
                     if (_context.Funcao.FirstOrDefault(m => m.NomeFuncao == funcao.NomeFuncao) == null) {
                         _context.Update(funcao);
                         await _context.SaveChangesAsync();
-                        ViewBag.Title = "Nova funcão criada com sucesso";
+                        ViewBag.Title = "Nova funcão editada com sucesso";
                         return View("Success");
                     } else {
                         // aparece a mensagem de erro em baixo do input do Nome
