@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GestaoTarefasIPG.Migrations
 {
     [DbContext(typeof(IPGDbContext))]
-    [Migration("20200120220129_Depar")]
-    partial class Depar
+    [Migration("20200122120742_Master")]
+    partial class Master
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,17 +27,12 @@ namespace GestaoTarefasIPG.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("EscolaId")
-                        .HasColumnType("int");
-
                     b.Property<string>("NomeDepartamento")
                         .IsRequired()
                         .HasColumnType("nvarchar(20)")
                         .HasMaxLength(20);
 
                     b.HasKey("DepartamentoId");
-
-                    b.HasIndex("EscolaId");
 
                     b.ToTable("Departamento");
                 });
@@ -79,15 +74,6 @@ namespace GestaoTarefasIPG.Migrations
                     b.HasKey("FuncaoId");
 
                     b.ToTable("Funcao");
-                });
-
-            modelBuilder.Entity("GestaoTarefasIPG.Models.Departamento", b =>
-                {
-                    b.HasOne("GestaoTarefasIPG.Models.Escola", "Escola")
-                        .WithMany("Departamentos")
-                        .HasForeignKey("EscolaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

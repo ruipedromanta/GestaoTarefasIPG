@@ -2,7 +2,7 @@
 
 namespace GestaoTarefasIPG.Migrations
 {
-    public partial class AddEscolas : Migration
+    public partial class Master : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
