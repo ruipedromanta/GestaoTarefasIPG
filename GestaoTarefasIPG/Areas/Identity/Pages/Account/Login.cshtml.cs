@@ -41,11 +41,12 @@ namespace GestaoTarefasIPG.Areas.Identity.Pages.Account {
         public string ErrorMessage { get; set; }
 
         public class InputModel {
-            [Required]
+            [Required(ErrorMessage ="O campo email tem de ser preenchido.")]
             [EmailAddress]
+
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "O campo password tem de ser preenchido.")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 

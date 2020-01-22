@@ -26,15 +26,15 @@ namespace GestaoTarefasIPG.Areas.Identity.Pages.Account.Manage {
         public string StatusMessage { get; set; }
 
         public class InputModel {
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [Required(ErrorMessage = "O campo password tem de ser preenchido.")]
+            [StringLength(100, ErrorMessage = "A password {0} deve ter pelo menos {2} e no máximo {1} caracteres.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "New password")]
+            [Display(Name = "Nova password")]
             public string NewPassword { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm new password")]
-            [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+            [Display(Name = "Confirme a nova password")]
+            [Compare("NewPassword", ErrorMessage = "A password de confirmação não corresponde há password.")]
             public string ConfirmPassword { get; set; }
         }
 
@@ -72,7 +72,7 @@ namespace GestaoTarefasIPG.Areas.Identity.Pages.Account.Manage {
             }
 
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Your password has been set.";
+            StatusMessage = "A sua password foi alterada.";
 
             return RedirectToPage();
         }

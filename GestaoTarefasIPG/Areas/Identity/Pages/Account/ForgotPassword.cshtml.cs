@@ -26,7 +26,7 @@ namespace GestaoTarefasIPG.Areas.Identity.Pages.Account {
         public InputModel Input { get; set; }
 
         public class InputModel {
-            [Required]
+            [Required(ErrorMessage = "O campo email tem de ser preenchido.")]
             [EmailAddress]
             public string Email { get; set; }
         }

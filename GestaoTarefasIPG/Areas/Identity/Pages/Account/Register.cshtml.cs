@@ -41,12 +41,12 @@ namespace GestaoTarefasIPG.Areas.Identity.Pages.Account {
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
         public class InputModel {
-            [Required]
+            [Required(ErrorMessage = "O campo email tem de ser preenchido.")]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "O campo password tem de ser preenchido.")]
             [StringLength(100, ErrorMessage = "A password {0} deve ter pelo menos {2} e no máximo {1} caracteres.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
