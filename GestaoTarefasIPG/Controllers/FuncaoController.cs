@@ -13,15 +13,48 @@ namespace GestaoTarefasIPG.Controllers
     {
         private readonly IPGDbContext _context;
 
+        private const int NUMERO_FUNCOES_POR_PAGINA = 10;
+        private const int NUMERO_PAGINAS_ANTES_E_DEPOIS = 2;
+
         public FuncaoController(IPGDbContext context)
         {
             _context = context;
         }
 
         // GET: Funcao
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.Funcao.ToListAsync());
+        //public async Task<IActionResult> Index(int page = 1){
+
+            public async Task<IActionResult> Index(int page = 1, string searchString = "", string sort = "true") {
+            var Funcao = from p in _context.Funcao select p;
+
+            if (!String.IsNullOrEmpty(searchString)) {
+                Funcao = Funcao.Where(p => p.NomeFuncao.Contains(searchString));
+            }
+
+
+            //return View(await _context.Escola.ToListAsync());
+            decimal numeroFuncoes = _context.Funcao.Count();
+
+            FuncoesViewModel vm = new FuncoesViewModel {
+                Sort = sort,
+
+                PaginaAtual = page,
+
+                PrimeiraPagina = Math.Max(1, page - NUMERO_PAGINAS_ANTES_E_DEPOIS),
+
+                TotalPaginas = (int)Math.Ceiling(numeroFuncoes / NUMERO_FUNCOES_POR_PAGINA)
+            };
+
+            if (sort.Equals("true")) {
+                vm.Funcoes = Funcao.OrderBy(p => p.NomeFuncao).Skip((page - 1) * NUMERO_FUNCOES_POR_PAGINA).Take(NUMERO_FUNCOES_POR_PAGINA);
+            } else {
+                vm.Funcoes = Funcao.OrderByDescending(p => p.NomeFuncao).Skip((page - 1) * NUMERO_FUNCOES_POR_PAGINA).Take(NUMERO_FUNCOES_POR_PAGINA);
+            }
+
+            vm.UltimaPagina = Math.Min(vm.TotalPaginas, page + NUMERO_PAGINAS_ANTES_E_DEPOIS);
+            vm.StringProcura = searchString;
+
+            return View(vm);
         }
 
         // GET: Funcao/Details/5
@@ -55,11 +88,20 @@ namespace GestaoTarefasIPG.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("FuncaoId,NomeFuncao")] Funcao funcao)
         {
-            if (ModelState.IsValid)
+            
             {
-                _context.Add(funcao);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                
+
+                    if (_context.Funcao.FirstOrDefault(m => m.NomeFuncao == funcao.NomeFuncao) == null) {
+                    _context.Add(funcao);
+                    await _context.SaveChangesAsync();
+                    ViewBag.Title = "Nova funcão criada com sucesso";
+                    return View("Success");
+                } else {
+                    
+                    ModelState.AddModelError("NomeFuncao", "A função que pretende criar já existe.");
+                    
+                }
             }
             return View(funcao);
         }
@@ -76,7 +118,7 @@ namespace GestaoTarefasIPG.Controllers
             if (funcao == null)
             {
                 return NotFound();
-            }
+            }   
             return View(funcao);
         }
 
@@ -96,8 +138,20 @@ namespace GestaoTarefasIPG.Controllers
             {
                 try
                 {
-                    _context.Update(funcao);
-                    await _context.SaveChangesAsync();
+                    /* _context.Update(funcao);
+                     await _context.SaveChangesAsync();*/
+
+                    // se isto for null é porque não encontrou nenhum registo na tabela Escola com o mesmo Nome
+                    if (_context.Funcao.FirstOrDefault(m => m.NomeFuncao == funcao.NomeFuncao) == null) {
+                        _context.Update(funcao);
+                        await _context.SaveChangesAsync();
+                        ViewBag.Title = "Nova funcão editada com sucesso";
+                        return View("Success");
+                    } else {
+                        // aparece a mensagem de erro em baixo do input do Nome
+                        ModelState.AddModelError("NomeFuncao", "A função que pretende criar já existe");
+                        return View(funcao);
+                    }
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -110,7 +164,12 @@ namespace GestaoTarefasIPG.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
+
+                ViewBag.Title = "Funcão editada com sucesso";
+                //ViewBag.Message = "A Funcão foi editada com sucesso";
+
+                return View("Success");
             }
             return View(funcao);
         }
@@ -141,7 +200,12 @@ namespace GestaoTarefasIPG.Controllers
             var funcao = await _context.Funcao.FindAsync(id);
             _context.Funcao.Remove(funcao);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            //return RedirectToAction(nameof(Index));
+
+            ViewBag.Title = "Funcão apagada com sucesso";
+            //ViewBag.Message = "A Funcão foi apagada com sucesso";
+
+            return View("Success");
         }
 
         private bool FuncaoExists(int id)
