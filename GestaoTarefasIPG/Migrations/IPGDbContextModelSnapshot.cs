@@ -35,6 +35,28 @@ namespace GestaoTarefasIPG.Migrations
                     b.ToTable("Departamento");
                 });
 
+            modelBuilder.Entity("GestaoTarefasIPG.Models.Escola", b =>
+                {
+                    b.Property<int>("EscolaId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("NomeEscola")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
+
+                    b.Property<string>("Telefone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(9)")
+                        .HasMaxLength(9);
+
+                    b.HasKey("EscolaId");
+
+                    b.ToTable("Escola");
+                });
+
             modelBuilder.Entity("GestaoTarefasIPG.Models.Funcao", b =>
                 {
                     b.Property<int>("FuncaoId")

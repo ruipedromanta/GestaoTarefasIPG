@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GestaoTarefasIPG.Migrations
 {
     [DbContext(typeof(IPGDbContext))]
-    [Migration("20191125155645_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20191204153146_N")]
+    partial class N
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -19,6 +19,23 @@ namespace GestaoTarefasIPG.Migrations
                 .HasAnnotation("ProductVersion", "3.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("GestaoTarefasIPG.Models.Departamento", b =>
+                {
+                    b.Property<int>("DepartamentoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("NomeDepartamento")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(120)")
+                        .HasMaxLength(120);
+
+                    b.HasKey("DepartamentoId");
+
+                    b.ToTable("Departamento");
+                });
 
             modelBuilder.Entity("GestaoTarefasIPG.Models.Escola", b =>
                 {
@@ -40,6 +57,23 @@ namespace GestaoTarefasIPG.Migrations
                     b.HasKey("EscolaId");
 
                     b.ToTable("Escola");
+                });
+
+            modelBuilder.Entity("GestaoTarefasIPG.Models.Funcao", b =>
+                {
+                    b.Property<int>("FuncaoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("NomeFuncao")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
+
+                    b.HasKey("FuncaoId");
+
+                    b.ToTable("Funcao");
                 });
 #pragma warning restore 612, 618
         }
