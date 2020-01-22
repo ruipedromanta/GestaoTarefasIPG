@@ -225,7 +225,7 @@ namespace GestaoTarefasIPG.Controllers
             _context.Departamento.Remove(departamento);
             await _context.SaveChangesAsync();
             ViewBag.Title = "O Departamento foi apagado com sucesso";
-            ViewBag.Message = "Novo Departamento foi apagado com sucesso";
+            
 
             return View("Success");
         }
