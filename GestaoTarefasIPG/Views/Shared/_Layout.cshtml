@@ -1,20 +1,13 @@
 ﻿    <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <!--
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    
 
-    <title>Gestão Tarefas IPG</title>
-        -->
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom fonts for this template -->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+   
+    
+    
     <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
@@ -40,7 +33,13 @@
                         <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Página Inicial</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacidade</a>
+                        <a class="nav-link" asp-area="" asp-controller="Departamento" asp-action="">Departamento</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Escolas" asp-action="">Escolas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Funcao" asp-action="">Funções</a>
                     </li>
                     <partial name="_LoginPartial" />
                 </ul>
@@ -48,8 +47,9 @@
         </div>
     </nav>
 
-    <header class="masthead" style="background-image: url('images/IPGblocoscentrais.jpg')">
-        <div class="overlay"></div>
+    <header class="masthead"   style="background-image: url('images/IPGblocoscentrais.jpg')">
+        <div class="overlay" ></div>
+        
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-md-10 mx-auto">
@@ -62,59 +62,25 @@
         </div>
     </header>
 
-    <!--
-    <header class="masthead" style="background-image: url('images/IPGblocoscentrais.jpg')">
-        <div class="overlay"></div>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-md-10 mx-auto">
-                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">GestaoTarefasIPG</a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                                aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                            <partial name="_LoginPartial" />
-                            <ul class="navbar-nav flex-grow-1">
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                                </li>
-                            </ul>
-                        </div>
+   
+                    <div class="container">
+                        <main role="main" class="pb-3">
+                            @RenderBody()
+                        </main>
                     </div>
-                </div>
-            </div>
-        </nav>
-    </header>
-     -->
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-md-10 mx-auto">
-                    &copy; 2019 - GestaoTarefasIPG - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!--
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2019 - GestaoTarefasIPG - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-        -->
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @RenderSection("Scripts", required: false)
+                    <footer>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-8 col-md-10 mx-auto">
+                                    &copy; 2019 - GestaoTarefasIPG - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+        
+                    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+                    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+                    <script src="~/js/site.js" asp-append-version="true"></script>
+                    @RenderSection("Scripts", required: false)
 </body>
 </html>

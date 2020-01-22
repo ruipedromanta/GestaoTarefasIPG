@@ -27,8 +27,8 @@ namespace GestaoTarefasIPG.Migrations
 
                     b.Property<string>("NomeDepartamento")
                         .IsRequired()
-                        .HasColumnType("nvarchar(120)")
-                        .HasMaxLength(120);
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
 
                     b.HasKey("DepartamentoId");
 

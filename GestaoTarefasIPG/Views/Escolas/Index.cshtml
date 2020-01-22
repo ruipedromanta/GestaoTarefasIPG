@@ -1,41 +1,71 @@
-﻿@model IEnumerable<GestaoTarefasIPG.Models.Escola>
+﻿@model EscolasViewModel
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Escolas</h1>
+<h1 align="center">Escolas</h1>
 
 <p>
-    <a asp-action="Create" class="btn btn-success">Criar nova escola</a>
+    <a asp-action="Create" class="btn btn-success">Criar escola</a>
 </p>
+
+@using (Html.BeginForm()) {
+    <p align="right">
+        <input type="text" name="searchString" value="@Model.StringProcura" />
+        <button type="submit" asp-action="Index" asp-route-page="1" asp-route-searchString="@Model.StringProcura">Procurar</button>
+    </p>
+}
+
+<script>
+    function sort() {
+        let sort = @Model.Sort;
+        let stringProcura = '@Model.StringProcura';
+        var result = "true".localeCompare(sort);
+        console.log('antes - ' + sort);
+        if (result == 0) {
+            sort = "false";
+        } else {
+            sort = "true";
+        }
+        console.log('depois - ' + sort);
+        const url = 'https://' + window.location.host + '/Escolas?page=1&sort=' + sort + '&searchString=' + stringProcura;
+        console.log('url - ' + url)
+        window.location.replace(url);
+    }
+</script>
+
 <table class="table table-info">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.NomeEscola)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Telefone)
-            </th>
-            <th></th>
+            <th><a onclick="sort()">Escola</a></th>
+            <th align="center">Telefone</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NomeEscola)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Telefone)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.EscolaId" class="btn btn-warning">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.EscolaId" class="btn btn-info">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.EscolaId" class="btn btn-danger">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Escolas) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeEscola)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefone)
+                </td>
+                <td align="right">
+                    <a asp-action="Edit" asp-route-id="@item.EscolaId" class="btn btn-warning">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.EscolaId" class="btn btn-info">Detalhes</a> |
+                    <a asp-action="Delete" asp-route-id="@item.EscolaId" class="btn btn-danger">Apagar</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@for (int i = Model.FirstPageShow; i <= Model.LastPageShow; i++) {
+    @if (i == Model.CurrentPage) {
+        <a href="#" class="btn btn-primary">@i</a>
+    } else {
+        <a asp-action="Index" asp-route-page="@i" class="btn btn-outline-info ">@i</a>
+    }
+}
+
