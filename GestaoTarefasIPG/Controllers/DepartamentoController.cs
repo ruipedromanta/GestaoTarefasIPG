@@ -13,15 +13,31 @@ namespace GestaoTarefasIPG.Controllers
     {
         private readonly IPGDbContext _context;
 
+        public int PaginasTamanho = 5;
         public DepartamentoController(IPGDbContext context)
         {
             _context = context;
         }
 
         // GET: Departamento
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.Departamento.ToListAsync());
+        public IActionResult Index(int page = 1) {
+            decimal nuDepartamento = _context.Departamento.Count();
+            int NUMERO_PAGINAS_ANTES_DEPOIS = ((int)nuDepartamento / PaginasTamanho);
+
+            if (nuDepartamento % PaginasTamanho == 0) {
+                NUMERO_PAGINAS_ANTES_DEPOIS -= 1;
+            }
+
+            DepartamentoVModel dp = new DepartamentoVModel {
+                Departamento = _context.Departamento.OrderBy(p => p.NomeDepartamento).Skip((page - 1) * PaginasTamanho).Take(PaginasTamanho),
+                PagAtual = page,
+                PriPagina = Math.Max(1, page - NUMERO_PAGINAS_ANTES_DEPOIS),
+                TotPaginas = (int)Math.Ceiling(nuDepartamento / PaginasTamanho)
+            };
+
+            dp.UltPagina = Math.Min(dp.TotPaginas, page + NUMERO_PAGINAS_ANTES_DEPOIS);
+
+            return View(dp);
         }
 
         // GET: Departamento/Details/5
@@ -53,7 +69,7 @@ namespace GestaoTarefasIPG.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("DepartamentoId,NomeDepartamento,NumeroDepartamento")] Departamento departamento)
+        public async Task<IActionResult> Create([Bind("DepartamentoId,NomeDepartamento")] Departamento departamento)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +101,7 @@ namespace GestaoTarefasIPG.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("DepartamentoId,NomeDepartamento,NumeroDepartamento")] Departamento departamento)
+        public async Task<IActionResult> Edit(int id, [Bind("DepartamentoId,NomeDepartamento")] Departamento departamento)
         {
             if (id != departamento.DepartamentoId)
             {

@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GestaoTarefasIPG.Migrations
 {
     [DbContext(typeof(IPGDbContext))]
-    [Migration("20191203133159_initial")]
-    partial class initial
+    [Migration("20191204153146_N")]
+    partial class N
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,14 +32,31 @@ namespace GestaoTarefasIPG.Migrations
                         .HasColumnType("nvarchar(120)")
                         .HasMaxLength(120);
 
-                    b.Property<string>("NumeroDepartamento")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(8)")
-                        .HasMaxLength(8);
-
                     b.HasKey("DepartamentoId");
 
                     b.ToTable("Departamento");
+                });
+
+            modelBuilder.Entity("GestaoTarefasIPG.Models.Escola", b =>
+                {
+                    b.Property<int>("EscolaId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("NomeEscola")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
+
+                    b.Property<string>("Telefone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(9)")
+                        .HasMaxLength(9);
+
+                    b.HasKey("EscolaId");
+
+                    b.ToTable("Escola");
                 });
 
             modelBuilder.Entity("GestaoTarefasIPG.Models.Funcao", b =>

@@ -1,0 +1,33 @@
+﻿@model GestaoTarefasIPG.Models.Escola
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Criar nova escola</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NomeEscola" class="control-label">Nome da Escola</label>
+                <input asp-for="NomeEscola" class="form-control" />
+                <span asp-validation-for="NomeEscola" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telefone" class="control-label"></label>
+                <input asp-for="Telefone" class="form-control" />
+                <span asp-validation-for="Telefone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Criar" class="btn btn-success" /> |
+                <a asp-action="Index" class="btn btn-primary">Voltar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
