@@ -53,7 +53,7 @@ namespace GestaoTarefasIPG.Models {
         }
 
 
-        public static async Task PopulateUsersAsync(UserManager<IdentityUser> userManager) {
+        public static async Task AdicionaUsers(UserManager<IdentityUser> userManager) {
             const string ADMIN_USERNAME = "admin@ipg.pt";
             const string ADMIN_PASSWORD = "Admin123$";
 

@@ -49,7 +49,7 @@ namespace GestaoTarefasIPG.Areas.Identity.Pages.Account {
             }
 
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Obrigado por consfirmar a mudança de email.";
+            StatusMessage = "Obrigado por confirmar a mudança de email.";
             return Page();
         }
     }

@@ -119,7 +119,7 @@ namespace GestaoTarefasIPG
                     SeedData.AdicionaDepartamentos(db);
                     SeedData.AdicionaEscolas(db);
                     SeedData.AdicionaFuncoes(db);
-                    SeedData.PopulateUsersAsync(userManager).Wait();
+                    SeedData.AdicionaUsers(userManager).Wait();
                 }
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
