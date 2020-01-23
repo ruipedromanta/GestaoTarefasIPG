@@ -102,7 +102,7 @@ namespace GestaoTarefasIPG.Controllers
                 if (_context.Departamento.FirstOrDefault(p => p.NomeDepartamento == departamento.NomeDepartamento) == null) {
                     _context.Add(departamento);
                     await _context.SaveChangesAsync();
-                    ViewBag.Title = "O Departamento foi editado com sucesso";
+                    ViewBag.Title = "O Departamento foi criado com sucesso";
                     
                     return View("Success");
                 } else {

@@ -183,7 +183,7 @@ namespace GestaoTarefasIPG.Controllers {
             await _context.SaveChangesAsync();
             //return RedirectToAction(nameof(Index));
 
-            ViewBag.Title = "Funcão apagada com sucesso";
+            ViewBag.Title = "Função apagada com sucesso";
             //ViewBag.Message = "A Funcão foi apagada com sucesso";
 
             return View("Success");
